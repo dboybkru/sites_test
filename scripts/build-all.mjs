@@ -10,6 +10,18 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const sitesDir = join(root, 'sites');
 const stageDir = join(root, 'showcase', 'public', 's');
 
+// Сборки на Windows иногда падают флапающим нативным крэшем (0xC0000409) —
+// ретраим каждую сборку до 3 раз.
+function run(cmd, opts, tries = 3) {
+  for (let i = 1; i <= tries; i++) {
+    try { execSync(cmd, opts); return; }
+    catch (e) {
+      if (i === tries) throw e;
+      console.log(`  ⚠ попытка ${i} упала (${e.status ?? e.message}), повтор...`);
+    }
+  }
+}
+
 if (existsSync(stageDir)) rmSync(stageDir, { recursive: true, force: true });
 
 const sites = existsSync(sitesDir)
@@ -21,7 +33,7 @@ for (const slug of sites) {
   if (!existsSync(join(dir, 'package.json'))) continue;
   console.log(`\n▶ building site: ${slug}`);
   // SITE_BASE заставляет Astro собрать сайт под подпутём /s/<slug>/
-  execSync('npm run build', {
+  run('npm run build', {
     cwd: dir,
     stdio: 'inherit',
     env: { ...process.env, SITE_BASE: `/s/${slug}/` },
@@ -31,5 +43,5 @@ for (const slug of sites) {
 }
 
 console.log('\n▶ building showcase');
-execSync('npm run build', { cwd: join(root, 'showcase'), stdio: 'inherit' });
+run('npm run build', { cwd: join(root, 'showcase'), stdio: 'inherit' });
 console.log('\n✅ Готово → showcase/dist (включает витрину и все сайты под /s/<slug>/)');

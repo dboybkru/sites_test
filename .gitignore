@@ -16,6 +16,10 @@ showcase/public/s/
 graphify-out/
 .graphify_*
 
+# raw dropped images (huge originals; optimized webp is committed in sites/*/public/img)
+assets-incoming/*
+!assets-incoming/README.md
+
 # os / editor
 .DS_Store
 Thumbs.db

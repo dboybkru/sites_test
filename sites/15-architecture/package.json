@@ -1,0 +1,9 @@
+{
+  "name": "@site/15-architecture",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Премиум фото-лендинг: бруталистская архитектура в джунглях (день/ночь).",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1" }
+}

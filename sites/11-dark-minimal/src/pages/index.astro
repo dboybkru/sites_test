@@ -12,6 +12,7 @@ const rows = [
   { t: 'Наблюдаемость', d: 'Метрики, трейсы и логи из коробки.' },
   { t: 'Приватность', d: 'Данные не покидают выбранный регион.' },
 ];
+const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
@@ -42,6 +43,11 @@ const rows = [
         {stats.map((s) => (<div><b>{s.n}</b><span>{s.l}</span></div>))}
       </div>
     </header>
+
+    <section class="visual">
+      <img src={`${base}img/hero.webp`} alt="Панорама города от заката до ночи" loading="lazy" />
+      <div class="visual-cap">12 регионов · единый контроль-плейн</div>
+    </section>
 
     <section class="rows">
       {rows.map((r) => (
@@ -84,6 +90,9 @@ const rows = [
       .stats div { display: flex; flex-direction: column; gap: 4px; }
       .stats b { font-size: 1.8rem; font-weight: 600; }
       .stats span { color: var(--dim); font-size: .85rem; }
+      .visual { max-width: 1100px; margin: 0 auto 4vh; padding: 0 6vw; position: relative; }
+      .visual img { width: 100%; border-radius: 16px; border: 1px solid var(--line); display: block; }
+      .visual-cap { position: absolute; left: calc(6vw + 18px); bottom: 18px; font-family: var(--font-mono); font-size: .82rem; color: #fff; background: rgba(10,10,11,.6); backdrop-filter: blur(8px); padding: 8px 13px; border-radius: 8px; border: 1px solid var(--line); }
       .rows { max-width: 760px; margin: 0 auto; padding: 0 6vw 12vh; display: grid; gap: 0; }
       .row { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
         padding: 26px 0; border-bottom: 1px solid var(--line); transition: padding-left .2s; }
