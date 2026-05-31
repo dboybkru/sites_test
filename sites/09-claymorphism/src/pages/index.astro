@@ -1,0 +1,104 @@
+---
+import '@lab/tokens/tokens.css';
+import '@lab/motion/motion.css';
+
+const cards = [
+  { ic: '🫧', t: 'Мягко', d: 'Скруглённые формы и двойные тени делают элементы «надувными».' },
+  { ic: '🍡', t: 'Пастельно', d: 'Тёплая нежная палитра без резких контрастов.' },
+  { ic: '🧸', t: 'Дружелюбно', d: 'Игрушечная пластика снижает напряжение интерфейса.' },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claymorphism</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="logo" href="#"><span class="dot"></span> Clay</a>
+      <div class="links">
+        <a href="#">Продукт</a>
+        <a href="#">Цены</a>
+        <a href="#" class="btn">Попробовать</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="m-fade-up">
+        <span class="pill">✨ новый дизайн</span>
+        <h1>Интерфейс, который хочется потрогать</h1>
+        <p>Claymorphism превращает плоские блоки в мягкие объёмные фигуры — будто вылепленные из пластилина.</p>
+        <div class="cta">
+          <a href="#" class="btn btn-lg">Начать бесплатно</a>
+          <a href="#" class="btn btn-lg btn-soft">Смотреть тур</a>
+        </div>
+      </div>
+      <div class="blob-stack m-float" aria-hidden="true">
+        <div class="clay c1"></div>
+        <div class="clay c2"></div>
+        <div class="clay c3">🎈</div>
+      </div>
+    </header>
+
+    <section class="cards">
+      {cards.map((c) => (
+        <article class="claycard m-fade-up">
+          <div class="emoji">{c.ic}</div>
+          <h3>{c.t}</h3>
+          <p>{c.d}</p>
+        </article>
+      ))}
+    </section>
+
+    <footer>
+      <p>Сделано мягко · 2026</p>
+      <a href="/">← на витрину</a>
+    </footer>
+
+    <style>
+      :root {
+        --bg: #efeafe; --clay1: #f4a6c0; --clay2: #a6c8f4; --clay3: #f9d29b; --ink: #5b4b6b;
+        --r: 34px;
+        --sh: 8px 8px 18px #c9c2e8, -8px -8px 18px #ffffff;
+        --inset: inset 4px 4px 8px rgba(255,255,255,.7), inset -5px -5px 10px rgba(150,140,190,.35);
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans); }
+      .btn { display: inline-block; text-decoration: none; color: #fff; font-weight: 700; background: linear-gradient(145deg,#f4a6c0,#e98bac);
+        border-radius: 999px; padding: 11px 22px; box-shadow: var(--sh); transition: transform .15s, box-shadow .15s; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn:active { box-shadow: var(--inset); }
+      .btn-lg { padding: 15px 30px; font-size: 1.05rem; }
+      .btn-soft { background: linear-gradient(145deg,#fff,#ece6fb); color: var(--ink); }
+      .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 5vw; }
+      .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.3rem; color: var(--ink); text-decoration: none; }
+      .dot { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(145deg,#f4a6c0,#a6c8f4); box-shadow: var(--sh); }
+      .links { display: flex; align-items: center; gap: 22px; }
+      .links a { color: var(--ink); text-decoration: none; font-weight: 600; }
+      .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; max-width: 1150px; margin: 0 auto; padding: 6vh 5vw; }
+      .pill { display: inline-block; background: var(--bg); border-radius: 999px; padding: 8px 18px; box-shadow: var(--sh); font-weight: 700; font-size: .85rem; }
+      h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.05; margin: 20px 0; }
+      .hero p { font-size: 1.15rem; line-height: 1.6; max-width: 440px; color: #6e5e7e; }
+      .cta { display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+      .blob-stack { position: relative; height: 340px; }
+      .clay { position: absolute; border-radius: 46% 54% 52% 48% / 50% 48% 52% 50%; box-shadow: var(--sh); }
+      .c1 { width: 240px; height: 240px; background: linear-gradient(145deg,#f4a6c0,#ed8fae); top: 30px; left: 40px; }
+      .c2 { width: 150px; height: 150px; background: linear-gradient(145deg,#a6c8f4,#8fb4ea); top: 0; right: 30px; }
+      .c3 { width: 120px; height: 120px; background: linear-gradient(145deg,#f9d29b,#f3c07f); bottom: 10px; right: 60px;
+        display: grid; place-items: center; font-size: 2.4rem; }
+      .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 28px; max-width: 1000px; margin: 0 auto; padding: 6vh 5vw; }
+      .claycard { background: var(--bg); border-radius: var(--r); padding: 28px; box-shadow: var(--sh); }
+      .emoji { width: 64px; height: 64px; display: grid; place-items: center; font-size: 1.9rem; border-radius: 20px;
+        background: var(--bg); box-shadow: var(--inset); margin-bottom: 16px; }
+      .claycard h3 { margin: 0 0 8px; font-size: 1.35rem; }
+      .claycard p { margin: 0; color: #6e5e7e; line-height: 1.55; }
+      footer { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 5vh 5vw; color: #8a7c98; }
+      footer p { margin: 0; color: #8a7c98; }
+      footer a { color: #e98bac; text-decoration: none; font-weight: 700; }
+      @media (max-width: 760px){ .hero { grid-template-columns: 1fr; } .blob-stack { height: 280px; } .links a:not(.btn){ display:none; } }
+    </style>
+  </body>
+</html>

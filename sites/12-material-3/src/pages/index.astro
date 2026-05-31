@@ -1,0 +1,227 @@
+---
+// Material Design 3 — CSS-only реализация на токенах --md-sys-* (SSR-безопасно, без web-components).
+const cards = [
+  { icon: 'palette', title: 'Динамический цвет', body: 'Вся схема выводится из одного seed-цвета и держит тональные пары.' },
+  { icon: 'view_quilt', title: 'Тональные поверхности', body: 'Глубина — через уровни surface-container, а не тени.' },
+  { icon: 'bolt', title: 'Выразительность', body: 'Скруглённые формы и акцентная типографика создают характер.' },
+];
+const chips = ['Дизайн', 'Токены', 'Доступность', 'Адаптивность'];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Material Design 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="appbar">
+      <span class="msym">spa</span>
+      <h1 class="appbar-title">Material 3</h1>
+      <span class="spacer"></span>
+      <button class="icon-btn" aria-label="Тема"><span class="msym">dark_mode</span></button>
+      <button class="icon-btn" aria-label="Аккаунт"><span class="msym">account_circle</span></button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="label">design system</span>
+          <h2 class="display">Personal. Adaptive. Expressive.</h2>
+          <p class="body-l">Демонстрация Material Design 3 на чистых токенах <code>--md-sys-*</code>: тональные поверхности, корректные цветовые пары, формы и типошкала.</p>
+          <div class="btn-row">
+            <button class="md-btn filled"><span class="msym">rocket_launch</span> Начать</button>
+            <button class="md-btn tonal">Подробнее</button>
+            <button class="md-btn outlined">Документация</button>
+            <button class="md-btn text">Позже</button>
+          </div>
+          <div class="chips">
+            {chips.map((c, i) => (
+              <button class={`chip ${i === 0 ? 'selected' : ''}`}>
+                {i === 0 && <span class="msym chk">check</span>}{c}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="hero-figure" aria-hidden="true">
+          <div class="tonal-stack">
+            <span class="t t1">surface</span>
+            <span class="t t2">container</span>
+            <span class="t t3">container-high</span>
+            <span class="t t4">primary</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards">
+        {cards.map((c) => (
+          <article class="md-card">
+            <div class="card-media"><span class="msym lg">{c.icon}</span></div>
+            <div class="card-body">
+              <h3 class="title-m">{c.title}</h3>
+              <p class="body-m">{c.body}</p>
+            </div>
+            <div class="card-actions">
+              <button class="md-btn text sm">Отмена</button>
+              <button class="md-btn tonal sm">Открыть</button>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section class="form-block">
+        <h3 class="headline">Связаться</h3>
+        <div class="field">
+          <input id="name" type="text" placeholder=" " />
+          <label for="name">Имя</label>
+        </div>
+        <div class="field">
+          <input id="email" type="email" placeholder=" " />
+          <label for="email">Email</label>
+        </div>
+        <div class="form-actions">
+          <button class="md-btn text">Сбросить</button>
+          <button class="md-btn filled">Отправить</button>
+        </div>
+      </section>
+
+      <a class="back" href="/">← на витрину</a>
+    </main>
+
+    <button class="fab" aria-label="Создать"><span class="msym">edit</span></button>
+
+    <style>
+      /* ---- MD3 ТОКЕНЫ (seed #6750A4) ---- */
+      :root {
+        --md-sys-color-primary: #6750A4;
+        --md-sys-color-on-primary: #FFFFFF;
+        --md-sys-color-primary-container: #EADDFF;
+        --md-sys-color-on-primary-container: #21005D;
+        --md-sys-color-secondary-container: #E8DEF8;
+        --md-sys-color-on-secondary-container: #1D192B;
+        --md-sys-color-surface: #FEF7FF;
+        --md-sys-color-on-surface: #1D1B20;
+        --md-sys-color-on-surface-variant: #49454F;
+        --md-sys-color-surface-container-low: #F7F2FA;
+        --md-sys-color-surface-container: #F3EDF7;
+        --md-sys-color-surface-container-high: #ECE6F0;
+        --md-sys-color-surface-container-highest: #E6E0E9;
+        --md-sys-color-outline: #79747E;
+        --md-sys-color-outline-variant: #CAC4D0;
+        --md-sys-shape-corner-small: 8px;
+        --md-sys-shape-corner-medium: 12px;
+        --md-sys-shape-corner-large: 16px;
+        --md-sys-shape-corner-xl: 28px;
+        --md-sys-shape-corner-full: 9999px;
+        --ease-emph: cubic-bezier(0.2, 0, 0, 1);
+        --font: 'Roboto Flex', system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --md-sys-color-primary: #D0BCFF;
+          --md-sys-color-on-primary: #381E72;
+          --md-sys-color-primary-container: #4F378B;
+          --md-sys-color-on-primary-container: #EADDFF;
+          --md-sys-color-secondary-container: #4A4458;
+          --md-sys-color-on-secondary-container: #E8DEF8;
+          --md-sys-color-surface: #141218;
+          --md-sys-color-on-surface: #E6E0E9;
+          --md-sys-color-on-surface-variant: #CAC4D0;
+          --md-sys-color-surface-container-low: #1D1B20;
+          --md-sys-color-surface-container: #211F26;
+          --md-sys-color-surface-container-high: #2B2930;
+          --md-sys-color-surface-container-highest: #36343B;
+          --md-sys-color-outline: #938F99;
+          --md-sys-color-outline-variant: #49454F;
+        }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: var(--font);
+        background: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface); }
+      .msym { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; vertical-align: middle; }
+      .msym.lg { font-size: 40px; }
+
+      /* App bar (elevation 2 → surface-container) */
+      .appbar { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 64px;
+        background: var(--md-sys-color-surface-container); position: sticky; top: 0; z-index: 10; }
+      .appbar > .msym:first-child { color: var(--md-sys-color-primary); font-size: 28px; }
+      .appbar-title { font-size: 22px; font-weight: 500; margin: 0; }
+      .spacer { flex: 1; }
+      .icon-btn { width: 40px; height: 40px; border: none; border-radius: var(--md-sys-shape-corner-full);
+        background: transparent; color: var(--md-sys-color-on-surface-variant); cursor: pointer; }
+      .icon-btn:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+
+      main { max-width: 1040px; margin: 0 auto; padding: 32px 24px 96px; }
+
+      /* Buttons */
+      .md-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 14px; font-weight: 500;
+        height: 40px; padding: 0 24px; border-radius: var(--md-sys-shape-corner-full); border: none; cursor: pointer; transition: box-shadow .2s, background .2s; }
+      .md-btn .msym { font-size: 18px; }
+      .md-btn.sm { height: 32px; padding: 0 16px; }
+      .md-btn.filled { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+      .md-btn.filled:hover { box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+      .md-btn.tonal { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+      .md-btn.outlined { background: transparent; color: var(--md-sys-color-primary); border: 1px solid var(--md-sys-color-outline); }
+      .md-btn.text { background: transparent; color: var(--md-sys-color-primary); padding: 0 12px; }
+      .md-btn.text:hover, .md-btn.outlined:hover { background: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent); }
+
+      /* Hero */
+      .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center;
+        background: var(--md-sys-color-surface-container-low); border-radius: var(--md-sys-shape-corner-xl); padding: 40px; margin-bottom: 28px; }
+      .label { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--md-sys-color-primary); font-weight: 700; }
+      .display { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; margin: 12px 0 16px; font-weight: 700; letter-spacing: -.5px; }
+      .body-l { font-size: 16px; line-height: 1.6; color: var(--md-sys-color-on-surface-variant); max-width: 460px; }
+      code { background: var(--md-sys-color-surface-container-high); padding: 2px 6px; border-radius: 6px; font-size: .9em; }
+      .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 18px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 16px; font-family: var(--font); font-size: 14px;
+        border-radius: var(--md-sys-shape-corner-small); border: 1px solid var(--md-sys-color-outline-variant);
+        background: transparent; color: var(--md-sys-color-on-surface-variant); cursor: pointer; }
+      .chip.selected { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); border-color: transparent; padding-left: 8px; }
+      .chip .chk { font-size: 18px; }
+      .tonal-stack { display: grid; gap: 10px; }
+      .t { padding: 16px; border-radius: var(--md-sys-shape-corner-large); font-size: 13px; font-weight: 500; }
+      .t1 { background: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface-variant); border: 1px solid var(--md-sys-color-outline-variant); }
+      .t2 { background: var(--md-sys-color-surface-container); }
+      .t3 { background: var(--md-sys-color-surface-container-high); }
+      .t4 { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+
+      /* Cards (filled) */
+      .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; margin-bottom: 28px; }
+      .md-card { background: var(--md-sys-color-surface-container); border-radius: var(--md-sys-shape-corner-medium); overflow: hidden; display: flex; flex-direction: column; }
+      .card-media { height: 120px; display: grid; place-items: center; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+      .card-body { padding: 16px; flex: 1; }
+      .title-m { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+      .body-m { font-size: 14px; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); margin: 0; }
+      .card-actions { display: flex; gap: 8px; justify-content: flex-end; padding: 8px 12px 12px; }
+
+      /* Form (outlined text fields) */
+      .form-block { background: var(--md-sys-color-surface-container-low); border-radius: var(--md-sys-shape-corner-large); padding: 28px; max-width: 520px; }
+      .headline { font-size: 24px; font-weight: 500; margin: 0 0 20px; }
+      .field { position: relative; margin-bottom: 20px; }
+      .field input { width: 100%; height: 56px; padding: 0 16px; font-family: var(--font); font-size: 16px;
+        background: transparent; color: var(--md-sys-color-on-surface);
+        border: 1px solid var(--md-sys-color-outline); border-radius: var(--md-sys-shape-corner-small); outline: none; }
+      .field input:focus { border: 2px solid var(--md-sys-color-primary); }
+      .field label { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); padding: 0 4px;
+        color: var(--md-sys-color-on-surface-variant); background: var(--md-sys-color-surface-container-low); transition: all .15s var(--ease-emph); pointer-events: none; }
+      .field input:focus + label, .field input:not(:placeholder-shown) + label { top: 0; font-size: 12px; color: var(--md-sys-color-primary); }
+      .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+      /* FAB (elevation 3) */
+      .fab { position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border: none; cursor: pointer;
+        border-radius: var(--md-sys-shape-corner-large); background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);
+        box-shadow: 0 3px 8px rgba(0,0,0,.25); display: grid; place-items: center; }
+      .fab .msym { font-size: 24px; }
+      .fab:hover { box-shadow: 0 5px 14px rgba(0,0,0,.32); }
+
+      .back { display: inline-block; margin-top: 32px; color: var(--md-sys-color-primary); text-decoration: none; }
+      @media (max-width: 720px){ .hero { grid-template-columns: 1fr; padding: 28px; } }
+    </style>
+  </body>
+</html>

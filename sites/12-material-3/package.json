@@ -1,0 +1,9 @@
+{
+  "name": "@site/12-material-3",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Скил-демо: Material Design 3 на токенах --md-sys-* (тональные поверхности, MD3-компоненты).",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1" }
+}

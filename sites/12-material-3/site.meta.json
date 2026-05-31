@@ -1,0 +1,8 @@
+{
+  "title": "Material Design 3",
+  "description": "Демо моего скила material-3: тональные поверхности, дизайн-токены --md-sys-*, кнопки/чипы/карточки/FAB, светлая и тёмная схемы.",
+  "skill": "material-3",
+  "tool": "Astro + MD3 tokens",
+  "status": "demo",
+  "accent": "#6750a4"
+}

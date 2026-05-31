@@ -1,0 +1,132 @@
+---
+import '@lab/tokens/tokens.css';
+import '@lab/motion/motion.css';
+
+const features = [
+  { ic: '⚡', t: 'Без полумер', d: 'Контраст на максимум. Никаких мягких теней — только резкий офсет.', c: '#ffe600' },
+  { ic: '◼', t: 'Честная сетка', d: 'Видимые границы блоков. Структура не прячется, а заявляет о себе.', c: '#7c5cff' },
+  { ic: '✺', t: 'Стикеры', d: 'Наклейки, бейджи и подписи как из принтера 90-х.', c: '#3df5a0' },
+  { ic: '✦', t: 'Моношрифт', d: 'Системный mono для подписей — техно-эстетика интерфейса.', c: '#ff5c8a' },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neubrutalism</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="logo" href="#">BRUT<span>★</span></a>
+      <div class="links">
+        <a href="#features">Фишки</a>
+        <a href="#pricing">Цена</a>
+        <a href="#" class="btn btn-sm">Войти</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-text m-fade-up">
+        <span class="sticker">// v2.0 уже тут</span>
+        <h1>СДЕЛАЙ<br>ГРОМКО.</h1>
+        <p>Необруатлизм не извиняется за свой вид. Толстые рамки, жёсткие тени и цвета, которые видно с орбиты.</p>
+        <div class="cta">
+          <a href="#" class="btn btn-lg">Поехали →</a>
+          <a href="#" class="btn btn-lg btn-ghost">Демо</a>
+        </div>
+      </div>
+      <div class="hero-art m-fade-up" style="animation-delay:.15s" aria-hidden="true">
+        <svg viewBox="0 0 240 240" width="100%">
+          <rect x="20" y="20" width="140" height="140" fill="#ffe600" stroke="#000" stroke-width="5"/>
+          <rect x="70" y="70" width="140" height="140" fill="#7c5cff" stroke="#000" stroke-width="5"/>
+          <circle cx="170" cy="60" r="34" fill="#3df5a0" stroke="#000" stroke-width="5"/>
+          <path d="M40 200 L110 130 L150 170 L210 110" fill="none" stroke="#000" stroke-width="6" stroke-linecap="square"/>
+        </svg>
+      </div>
+    </header>
+
+    <div class="marquee"><div class="track">
+      <span>★ ЖИРНО ★ ЧЕСТНО ★ ГРОМКО ★ БЕЗ ГРАДИЕНТОВ ★ ЖИРНО ★ ЧЕСТНО ★ ГРОМКО ★ БЕЗ ГРАДИЕНТОВ&nbsp;</span>
+      <span>★ ЖИРНО ★ ЧЕСТНО ★ ГРОМКО ★ БЕЗ ГРАДИЕНТОВ ★ ЖИРНО ★ ЧЕСТНО ★ ГРОМКО ★ БЕЗ ГРАДИЕНТОВ&nbsp;</span>
+    </div></div>
+
+    <section id="features" class="grid">
+      {features.map((f) => (
+        <article class="card" style={`--c:${f.c}`}>
+          <span class="ic">{f.ic}</span>
+          <h3>{f.t}</h3>
+          <p>{f.d}</p>
+        </article>
+      ))}
+    </section>
+
+    <section id="pricing" class="price">
+      <div class="ptag">
+        <span class="sticker alt">ЛУЧШИЙ ВЫБОР</span>
+        <h2>PRO</h2>
+        <p class="amount">990<span> ₽/мес</span></p>
+        <ul>
+          <li>✓ Всё без ограничений</li>
+          <li>✓ Своя палитра</li>
+          <li>✓ Экспорт в код</li>
+        </ul>
+        <a href="#" class="btn btn-lg">Забрать</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 BRUT★</span>
+      <a href="/">← на витрину</a>
+    </footer>
+
+    <style>
+      :root { --acc: #ffe600; --ink: #000; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f5f3e8; color: var(--ink);
+        font-family: var(--font-sans); }
+      .btn { display: inline-block; background: var(--acc); color: #000; text-decoration: none; font-weight: 800;
+        border: 3px solid #000; padding: 10px 20px; box-shadow: 5px 5px 0 #000; transition: transform .1s, box-shadow .1s; }
+      .btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #000; }
+      .btn:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 #000; }
+      .btn-sm { padding: 7px 14px; box-shadow: 3px 3px 0 #000; }
+      .btn-lg { padding: 14px 30px; font-size: 1.1rem; }
+      .btn-ghost { background: #fff; }
+      .nav { display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 5vw; border-bottom: 4px solid #000; background: #fff; position: sticky; top: 0; z-index: 5; }
+      .logo { font-weight: 900; font-size: 1.5rem; text-decoration: none; color: #000; letter-spacing: -.02em; }
+      .logo span { color: var(--acc); -webkit-text-stroke: 1px #000; }
+      .links { display: flex; align-items: center; gap: 22px; }
+      .links a { text-decoration: none; color: #000; font-weight: 700; }
+      .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; padding: 6vh 5vw; max-width: 1200px; margin: 0 auto; }
+      .sticker { display: inline-block; background: #7c5cff; color: #fff; font-family: var(--font-mono); font-weight: 700;
+        border: 3px solid #000; padding: 4px 12px; transform: rotate(-3deg); box-shadow: 4px 4px 0 #000; font-size: .85rem; }
+      .sticker.alt { background: var(--acc); color: #000; }
+      h1 { font-size: clamp(3rem, 9vw, 6rem); line-height: .92; margin: 18px 0; font-weight: 900; letter-spacing: -.03em; }
+      .hero-text p { font-size: 1.15rem; max-width: 460px; line-height: 1.5; font-weight: 500; }
+      .cta { display: flex; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+      .hero-art { background: #fff; border: 4px solid #000; box-shadow: 10px 10px 0 #000; padding: 20px; }
+      .marquee { background: #000; color: var(--acc); border-top: 4px solid #000; border-bottom: 4px solid #000; overflow: hidden; }
+      .track { display: inline-flex; white-space: nowrap; animation: scroll 22s linear infinite; font-weight: 800; font-size: 1.2rem; padding: 10px 0; }
+      @keyframes scroll { to { transform: translateX(-50%); } }
+      @media (prefers-reduced-motion: reduce){ .track { animation: none; } }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 24px;
+        max-width: 1200px; margin: 0 auto; padding: 8vh 5vw; }
+      .card { background: var(--c); border: 4px solid #000; box-shadow: 8px 8px 0 #000; padding: 22px; transition: transform .12s, box-shadow .12s; }
+      .card:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 #000; }
+      .ic { font-size: 2rem; display: block; }
+      .card h3 { margin: 10px 0 6px; font-size: 1.4rem; font-weight: 900; }
+      .card p { margin: 0; font-weight: 500; line-height: 1.45; }
+      .price { display: grid; place-items: center; padding: 4vh 5vw 10vh; }
+      .ptag { background: #fff; border: 4px solid #000; box-shadow: 12px 12px 0 #000; padding: 32px; max-width: 340px; text-align: center; }
+      .ptag h2 { font-size: 2.4rem; margin: 14px 0 0; font-weight: 900; }
+      .amount { font-size: 2.6rem; font-weight: 900; margin: 6px 0 14px; }
+      .amount span { font-size: 1rem; font-weight: 600; }
+      .ptag ul { list-style: none; padding: 0; margin: 0 0 22px; text-align: left; font-weight: 600; display: grid; gap: 8px; }
+      footer { display: flex; justify-content: space-between; align-items: center; padding: 22px 5vw; border-top: 4px solid #000; background: #000; color: #fff; font-weight: 700; }
+      footer a { color: var(--acc); text-decoration: none; }
+      @media (max-width: 760px){ .hero { grid-template-columns: 1fr; } .links a:not(.btn){ display: none; } }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "@site/09-claymorphism",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: Claymorphism — мягкие 3D «пластилиновые» формы, двойные тени, пастель.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@site/08-brutalism",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: Neubrutalism — жёсткие рамки, офсет-тени, кричащие цвета.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

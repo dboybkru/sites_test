@@ -1,0 +1,9 @@
+{
+  "name": "@site/11-dark-minimal",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: dark-first минимализм — строгий тёмный UI, воздух, один акцент.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}
