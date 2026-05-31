@@ -1,0 +1,9 @@
+{
+  "name": "@site/13-figma",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Скил-демо Figma → code: дизайн собран в Figma через MCP, затем реализован в коде.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1" }
+}

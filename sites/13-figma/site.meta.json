@@ -1,0 +1,8 @@
+{
+  "title": "Figma → Code",
+  "description": "Демо моего Figma-скила: лендинг сначала собран в Figma через MCP (плагин-API), затем перенесён в код 1:1. Панель-превью — слот под картинку.",
+  "skill": "figma",
+  "tool": "Figma + Astro",
+  "status": "demo",
+  "accent": "#7c3aed"
+}

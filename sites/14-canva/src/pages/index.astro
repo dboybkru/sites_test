@@ -1,0 +1,105 @@
+---
+// hero.png сгенерирован в Canva через MCP (generate-design → create-design-from-candidate → export-design),
+// скачан в public/img и вставлен ниже как реальная картинка.
+const base = import.meta.env.BASE_URL;
+const hero = `${base}img/hero.png`;
+const CANVA_URL = 'https://www.canva.com/d/OVUrSed-BzfBrIE';
+const steps = [
+  { n: '01', t: 'generate-design', d: 'Описал баннер промптом — Canva вернула 4 ИИ-варианта.' },
+  { n: '02', t: 'create-from-candidate', d: 'Выбрал вариант — он стал редактируемым дизайном в аккаунте.' },
+  { n: '03', t: 'export-design', d: 'Экспорт в PNG → скачал в проект → вставил на страницу.' },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canva → Web · nebula</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="logo" href="#">✦ studio</a>
+      <div class="nav-right">
+        <a href="#process">Как сделано</a>
+        <a href={CANVA_URL} target="_blank" rel="noopener" class="btn-sm">Открыть в Canva</a>
+      </div>
+    </nav>
+
+    <header class="hero" style={`background-image: linear-gradient(180deg, rgba(7,7,16,.55), rgba(7,7,16,.35) 45%, rgba(7,7,16,.92)), url(${hero})`}>
+      <div class="hero-inner">
+        <p class="eyebrow">✦ сгенерировано ИИ в Canva</p>
+        <h1>Картинка, рождённая<br>из одного промпта</h1>
+        <p class="sub">Этот фон — не сток и не CSS. Баннер сгенерирован в Canva, экспортирован в PNG и встроен в страницу как настоящее изображение.</p>
+        <div class="cta">
+          <a href="#process" class="btn filled">Как это сделано</a>
+          <a href={CANVA_URL} target="_blank" rel="noopener" class="btn outline">Исходник в Canva ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="process" class="process">
+      <h2>Три шага · Canva MCP</h2>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step"><span class="num">{s.n}</span><h3>{s.t}</h3><p>{s.d}</p></article>
+        ))}
+      </div>
+    </section>
+
+    <section class="showcase">
+      <figure>
+        <img src={hero} alt="Hero-баннер, сгенерированный в Canva" loading="lazy" />
+        <figcaption>«Sleek Hero Banner with Gradient and Blobs» — экспортированный PNG из Canva</figcaption>
+      </figure>
+    </section>
+
+    <footer class="foot">
+      <span>Картинка из <a href={CANVA_URL} target="_blank" rel="noopener">Canva</a> · встроена в Astro</span>
+      <a href="/">← на витрину</a>
+    </footer>
+
+    <style>
+      :root { --bg:#070710; --text:#fff; --dim:#b3b3c2; --dim2:#8f8fa6; --accent:#22d3ee; --violet:#8b5cf6; --ink:#04121a; --line:#21212e; --font:'Inter',system-ui,sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+      .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 22px 6vw; }
+      .logo { color: #fff; text-decoration: none; font-weight: 700; font-size: 20px; }
+      .nav-right { display: flex; align-items: center; gap: 22px; }
+      .nav-right a:not(.btn-sm) { color: var(--dim); text-decoration: none; font-size: 15px; }
+      .btn-sm { background: rgba(255,255,255,.12); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(6px); }
+
+      .hero { min-height: 92vh; background-size: cover; background-position: center; display: grid; align-items: center; }
+      .hero-inner { max-width: 720px; padding: 0 6vw; }
+      .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 18px; }
+      h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; margin: 0 0 20px; }
+      .sub { color: var(--dim); font-size: 18px; line-height: 1.55; max-width: 520px; margin: 0 0 32px; }
+      .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+      .btn { text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 12px; transition: transform .15s; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn.filled { background: var(--accent); color: var(--ink); }
+      .btn.outline { color: #fff; border: 1px solid rgba(255,255,255,.35); }
+
+      .process { max-width: 1000px; margin: 0 auto; padding: 10vh 6vw 6vh; }
+      .process h2 { text-align: center; font-size: clamp(1.6rem,4vw,2.4rem); margin: 0 0 48px; }
+      .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 18px; }
+      .step { background: #11111c; border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+      .num { font-family: var(--font); color: var(--accent); font-weight: 700; font-size: 14px; }
+      .step h3 { margin: 12px 0 8px; font-size: 1.1rem; font-family: ui-monospace, monospace; color: var(--violet); }
+      .step p { margin: 0; color: var(--dim); line-height: 1.55; font-size: .95rem; }
+
+      .showcase { max-width: 760px; margin: 0 auto; padding: 4vh 6vw 10vh; }
+      .showcase figure { margin: 0; }
+      .showcase img { width: 100%; border-radius: 20px; border: 1px solid var(--line); display: block; }
+      .showcase figcaption { text-align: center; color: var(--dim2); font-size: .9rem; margin-top: 14px; }
+
+      .foot { display: flex; align-items: center; justify-content: space-between; max-width: 1000px; margin: 0 auto; padding: 4vh 6vw; color: var(--dim2); font-size: 14px; border-top: 1px solid var(--line); }
+      .foot a { color: var(--accent); text-decoration: none; }
+      @media (max-width: 680px){ .nav-right a:not(.btn-sm){ display:none; } .hero { min-height: 80vh; } }
+    </style>
+  </body>
+</html>

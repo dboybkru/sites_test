@@ -1,0 +1,8 @@
+{
+  "title": "Canva → Web",
+  "description": "Демо моего Canva-скила: hero-баннер сгенерирован ИИ в Canva через MCP, экспортирован в PNG и вставлен в сайт как реальная картинка.",
+  "skill": "canva",
+  "tool": "Canva + Astro",
+  "status": "demo",
+  "accent": "#22d3ee"
+}

@@ -1,0 +1,100 @@
+---
+// Этот лендинг сначала собран в Figma через MCP (use_figma), затем перенесён в код 1:1.
+// Исходный Figma-файл: https://www.figma.com/design/dtJFIbr9PP8mEmpraGazFr
+const FIGMA_URL = 'https://www.figma.com/design/dtJFIbr9PP8mEmpraGazFr';
+const base = import.meta.env.BASE_URL;
+// Когда положишь картинку в public/img/preview.webp — раскомментируй её в .screen ниже.
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Figma → Code · nebula</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="frame">
+      <nav class="nav">
+        <a class="logo" href="#">◆ nebula</a>
+        <div class="nav-right">
+          <a href="#">Продукт</a>
+          <a href="#">Возможности</a>
+          <a href="#">Цены</a>
+          <a href="#" class="btn-login">Войти</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <p class="eyebrow">AI-ПЛАТФОРМА · 2026</p>
+        <h1>Запускай быстрее,<br>чем пишешь ТЗ</h1>
+        <p class="sub">Платформа, которая превращает идею в готовый продукт. Дизайн, код и деплой — в одном потоке, без переключений.</p>
+        <div class="cta-row">
+          <a href="#" class="btn filled">Начать бесплатно</a>
+          <a href="#" class="btn outline">Документация</a>
+        </div>
+      </section>
+
+      <section class="preview">
+        <div class="screen">
+          {/* Замени плейсхолдер на свою картинку:
+              <img src={`${base}img/preview.webp`} alt="Превью продукта" /> */}
+          <span class="ph">⬚ здесь будет твоё превью / скриншот</span>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <span>Собрано в <a href={FIGMA_URL} target="_blank" rel="noopener">Figma</a> → перенесено в код</span>
+        <a href="/">← на витрину</a>
+      </footer>
+    </div>
+
+    <style>
+      :root {
+        --bg: #0b0b12; --text: #ffffff; --dim: #b3b3c2; --dim2: #9b9bb0;
+        --accent: #8b5cf6; --accent2: #22d3ee; --ink: #0a0612; --line: #2a2a3a;
+        --font: 'Inter', system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+      .frame { max-width: 1280px; margin: 0 auto; padding: 40px 64px 80px; }
+
+      .nav { display: flex; align-items: center; justify-content: space-between; }
+      .logo { color: var(--text); text-decoration: none; font-weight: 700; font-size: 22px; }
+      .nav-right { display: flex; align-items: center; gap: 28px; }
+      .nav-right a:not(.btn-login) { color: var(--dim); text-decoration: none; font-size: 15px; font-weight: 500; }
+      .nav-right a:not(.btn-login):hover { color: var(--text); }
+      .btn-login { background: var(--accent); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 10px; }
+
+      .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 80px; }
+      .eyebrow { color: var(--accent2); font-weight: 600; font-size: 13px; letter-spacing: .12em; margin: 0 0 22px; }
+      h1 { font-size: clamp(2.6rem, 6vw, 4.1rem); font-weight: 700; line-height: 1.04; letter-spacing: -.02em; margin: 0 0 22px; }
+      .sub { color: var(--dim); font-size: 19px; line-height: 1.5; max-width: 640px; margin: 0 0 36px; }
+      .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+      .btn { text-decoration: none; font-weight: 600; font-size: 16px; padding: 16px 28px; border-radius: 12px; transition: transform .15s; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn.filled { background: var(--accent); color: var(--ink); }
+      .btn.outline { color: var(--text); border: 1px solid #66667a; }
+
+      .preview { margin-top: 56px; border-radius: 22px; padding: 24px;
+        background: linear-gradient(115deg, #6d28d9 0%, #4f46e5 55%, #13b5e6 100%); }
+      .screen { border-radius: 14px; background: rgba(11,11,18,.88); min-height: 400px;
+        display: grid; place-items: center; overflow: hidden; }
+      .screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .ph { color: var(--dim2); font-size: 15px; font-weight: 500; }
+
+      .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; color: var(--dim2); font-size: 14px; }
+      .foot a { color: var(--accent2); text-decoration: none; }
+
+      @media (max-width: 760px){
+        .frame { padding: 28px 22px 60px; }
+        .nav-right a:not(.btn-login) { display: none; }
+        .hero { padding-top: 48px; }
+        .screen { min-height: 260px; }
+      }
+    </style>
+  </body>
+</html>
