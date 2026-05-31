@@ -1,0 +1,8 @@
+{
+  "title": "Bento Box",
+  "description": "Асимметричная плиточная сетка из карточек разного размера.",
+  "skill": "layout",
+  "tool": "Astro",
+  "status": "demo",
+  "accent": "#f59e0b"
+}

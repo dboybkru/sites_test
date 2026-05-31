@@ -1,0 +1,9 @@
+{
+  "name": "@site/03-glassmorphism",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: Glassmorphism — матовое стекло, backdrop-blur.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

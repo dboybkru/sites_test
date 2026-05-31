@@ -1,9 +1,26 @@
 ---
 import '@lab/tokens/tokens.css';
 import '@lab/motion/motion.css';
-import { getSites } from '../sites.mjs';
 
-const sites = getSites();
+// Vite резолвит glob на этапе сборки — устойчиво к бандлингу (в отличие от fs + import.meta.url).
+const metas = import.meta.glob('../../../sites/*/site.meta.json', { eager: true });
+const sites = Object.entries(metas)
+  .map(([path, mod]) => {
+    const parts = path.split('/');
+    const slug = parts[parts.length - 2];
+    const m = mod.default ?? mod;
+    return {
+      slug,
+      href: `/s/${slug}/`,
+      title: m.title || slug,
+      description: m.description || '',
+      skill: m.skill || '',
+      tool: m.tool || '',
+      status: m.status || 'wip',
+      accent: m.accent || '#8b5cf6',
+    };
+  })
+  .sort((a, b) => a.slug.localeCompare(b.slug));
 ---
 
 <!doctype html>

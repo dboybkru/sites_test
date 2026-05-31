@@ -1,0 +1,58 @@
+---
+import '@lab/tokens/tokens.css';
+import '@lab/motion/motion.css';
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ретро-футуризм</title>
+  </head>
+  <body>
+    <div class="sun"></div>
+    <div class="grid-floor"></div>
+    <div class="scanlines"></div>
+
+    <main>
+      <p class="eyebrow m-fade-up">тренд · retro-future</p>
+      <h1 class="chrome m-fade-up">NEON&nbsp;2099</h1>
+      <p class="lead m-fade-up">Эстетика 80-х о будущем: закат, бесконечная сетка, хром и неон. Возврат Y2K в современном вебе.</p>
+      <div class="row m-fade-up">
+        <a class="btn" href="#">▶ Запуск</a>
+        <span class="tag">// synthwave mode</span>
+      </div>
+      <a class="back" href="/">← на витрину</a>
+    </main>
+
+    <style>
+      :root { --neon: #ff2e97; --cyan: #00e5ff; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; overflow: hidden; font-family: var(--font-sans); color: #fff;
+        background: linear-gradient(180deg, #0d0221 0%, #2d0b4e 45%, #51136b 70%, #ff6b6b 100%); }
+      .sun { position: fixed; top: 16%; left: 50%; transform: translateX(-50%); width: 320px; height: 320px;
+        border-radius: 50%; background: linear-gradient(180deg, #ffd166, #ff2e97); filter: blur(2px);
+        box-shadow: 0 0 90px #ff2e97aa; }
+      .sun::after { content:''; position:absolute; inset:0; border-radius:50%;
+        background: repeating-linear-gradient(180deg, transparent 0 14px, #2d0b4e 14px 22px); mask: linear-gradient(180deg, transparent 55%, #000 55%); }
+      .grid-floor { position: fixed; bottom: 0; left: -50%; width: 200%; height: 55%;
+        background-image: linear-gradient(#00e5ff55 1px, transparent 1px), linear-gradient(90deg, #00e5ff55 1px, transparent 1px);
+        background-size: 44px 44px; transform: perspective(340px) rotateX(70deg); transform-origin: bottom; }
+      .scanlines { position: fixed; inset: 0; pointer-events: none;
+        background: repeating-linear-gradient(180deg, rgba(0,0,0,.18) 0 2px, transparent 2px 4px); }
+      main { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; padding: 22vh var(--space-3) 0; text-align: center; }
+      .eyebrow { font-family: var(--font-mono); color: var(--cyan); letter-spacing: .35em; text-transform: uppercase; font-size: var(--fs-small); }
+      .chrome { font-size: clamp(3rem, 12vw, 7rem); margin: var(--space-2) 0; letter-spacing: .04em; font-weight: 900;
+        background: linear-gradient(180deg, #fff 0%, #c0c6ff 40%, #ff2e97 60%, #7a1f5a 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        text-shadow: 0 0 26px #ff2e9766; }
+      .lead { color: #e7d9ff; max-width: 480px; margin: 0 auto var(--space-3); }
+      .row { display: flex; gap: var(--space-2); align-items: center; justify-content: center; }
+      .btn { background: var(--neon); color: #fff; text-decoration: none; padding: 12px 26px; border-radius: 999px;
+        font-weight: 700; box-shadow: 0 0 24px var(--neon); border: 1px solid #ff8fc7; }
+      .tag { font-family: var(--font-mono); color: var(--cyan); font-size: var(--fs-small); }
+      .back { display: inline-block; margin-top: var(--space-4); color: var(--cyan); text-decoration: none; font-family: var(--font-mono); }
+    </style>
+  </body>
+</html>

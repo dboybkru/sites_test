@@ -1,0 +1,8 @@
+{
+  "title": "Glassmorphism",
+  "description": "Матовое стекло: backdrop-blur, прозрачность, цветные блобы под панелями.",
+  "skill": "style",
+  "tool": "Astro",
+  "status": "demo",
+  "accent": "#22d3ee"
+}

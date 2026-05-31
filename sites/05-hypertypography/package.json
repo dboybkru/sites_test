@@ -1,0 +1,9 @@
+{
+  "name": "@site/05-hypertypography",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: гипертипографика — текст как главный визуальный элемент.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

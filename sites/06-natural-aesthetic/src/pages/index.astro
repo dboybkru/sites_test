@@ -1,0 +1,58 @@
+---
+import '@lab/tokens/tokens.css';
+import '@lab/motion/motion.css';
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Природная эстетика</title>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <svg class="blob m-float" viewBox="0 0 200 200" aria-hidden="true">
+          <path fill="#7a9e6e" d="M44,-62C56,-52,63,-37,67,-21C71,-5,72,12,66,27C60,42,47,54,32,61C17,68,-1,70,-19,65C-37,60,-55,48,-64,32C-73,16,-73,-4,-66,-21C-59,-38,-46,-52,-31,-61C-16,-70,1,-74,17,-72C33,-70,32,-72,44,-62Z" transform="translate(100 100)"/>
+        </svg>
+        <div class="intro m-fade-up">
+          <p class="eyebrow">тренд · природная эстетика</p>
+          <h1>Тише. Теплее. Живее.</h1>
+          <p class="lead">Землистые тона, мягкие органические формы и серифная типографика создают спокойный, «аналоговый» ритм.</p>
+          <a class="btn" href="#">Прикоснуться →</a>
+        </div>
+      </header>
+
+      <section class="cards m-stagger">
+        <article style="--m-i:0"><h3>Земля</h3><p>Палитра из глины, мха и песка вместо чистых цифровых цветов.</p></article>
+        <article style="--m-i:1"><h3>Форма</h3><p>Никаких острых углов — только плавные, выросшие линии.</p></article>
+        <article style="--m-i:2"><h3>Воздух</h3><p>Щедрые поля и крупный межстрочный ритм дают тексту дышать.</p></article>
+      </section>
+
+      <a class="back" href="/">← на витрину</a>
+    </main>
+
+    <style>
+      :root { --accent: #7a9e6e; --clay: #c08457; --sand: #efe7d6; --ink: #3a352c; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--sand); color: var(--ink);
+        font-family: Georgia, 'Times New Roman', var(--font-sans);
+        background-image: radial-gradient(60% 40% at 80% 0%, #d9e2cb88, transparent 70%); }
+      main { max-width: 940px; margin: 0 auto; padding: var(--space-5) var(--space-3); }
+      .hero { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: center; margin-bottom: var(--space-5); }
+      .blob { width: 100%; max-width: 360px; filter: drop-shadow(0 20px 30px #7a9e6e44); }
+      .eyebrow { font-family: var(--font-mono); color: var(--clay); letter-spacing: .12em; text-transform: uppercase; font-size: var(--fs-small); margin: 0 0 var(--space-1); }
+      h1 { font-size: var(--fs-1); margin: 0 0 var(--space-2); line-height: 1.05; font-weight: 600; }
+      .lead { color: #5c5648; font-size: var(--fs-3); line-height: 1.6; max-width: 420px; }
+      .btn { display: inline-block; margin-top: var(--space-3); background: var(--accent); color: var(--sand);
+        text-decoration: none; padding: 12px 28px; border-radius: 999px; font-family: var(--font-sans); }
+      .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: var(--space-3); }
+      .cards article { background: #fbf7ee; border: 1px solid #e3d8c2; border-radius: 28px; padding: var(--space-3); }
+      h3 { margin: 0 0 var(--space-1); color: var(--accent); }
+      .cards p { margin: 0; color: #5c5648; font-size: var(--fs-small); line-height: 1.6; }
+      .back { display: inline-block; margin-top: var(--space-4); color: var(--clay); text-decoration: none; font-family: var(--font-sans); }
+      @media (max-width: 720px){ .hero { grid-template-columns: 1fr; } .blob { max-width: 220px; } }
+    </style>
+  </body>
+</html>

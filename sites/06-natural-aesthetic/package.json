@@ -1,0 +1,9 @@
+{
+  "name": "@site/06-natural-aesthetic",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: природная эстетика — органика, землистая палитра, мягкие формы.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

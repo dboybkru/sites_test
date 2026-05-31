@@ -1,0 +1,9 @@
+{
+  "name": "@site/02-bento-box",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Тренд: Bento box — асимметричная плиточная сетка.",
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": { "astro": "^5.6.1", "@lab/tokens": "*", "@lab/motion": "*" }
+}

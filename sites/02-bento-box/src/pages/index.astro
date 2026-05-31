@@ -1,0 +1,81 @@
+---
+import '@lab/tokens/tokens.css';
+import '@lab/motion/motion.css';
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bento Box</title>
+  </head>
+  <body>
+    <main>
+      <header class="m-fade-up">
+        <p class="eyebrow">тренд · bento box</p>
+        <h1>Всё по полочкам</h1>
+        <p class="lead">Контент разложен по плиткам разного размера — как в бэнто. Взгляд сразу ловит главное.</p>
+      </header>
+
+      <section class="bento m-stagger">
+        <div class="tile b-lg accent" style="--m-i:0">
+          <span class="kicker">Главное</span>
+          <h2>2.4×</h2>
+          <p>рост вовлечённости после редизайна</p>
+        </div>
+        <div class="tile b-wide" style="--m-i:1">
+          <span class="kicker">Скорость</span>
+          <h2>0.8s</h2>
+          <p>первая отрисовка</p>
+        </div>
+        <div class="tile" style="--m-i:2"><span class="kicker">Гео</span><h2>RU</h2></div>
+        <div class="tile" style="--m-i:3"><span class="kicker">Юзеры</span><h2>12k</h2></div>
+        <div class="tile b-tall dark" style="--m-i:4">
+          <span class="kicker">Палитра</span>
+          <div class="swatches"><i></i><i></i><i></i><i></i></div>
+          <p>тёплый акцент + нейтраль</p>
+        </div>
+        <div class="tile b-wide" style="--m-i:5">
+          <span class="kicker">Принцип</span>
+          <p class="big">Иерархия через размер, а не только цвет.</p>
+        </div>
+        <div class="tile" style="--m-i:6"><span class="kicker">CSS</span><h2>grid</h2></div>
+      </section>
+
+      <a class="back" href="/">← на витрину</a>
+    </main>
+
+    <style>
+      :root { --accent: #f59e0b; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); }
+      main { max-width: 1000px; margin: 0 auto; padding: var(--space-5) var(--space-3); }
+      .eyebrow { font-family: var(--font-mono); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; font-size: var(--fs-small); margin: 0 0 var(--space-1); }
+      h1 { font-size: var(--fs-1); margin: 0 0 var(--space-2); }
+      .lead { color: var(--color-text-dim); max-width: 520px; font-size: var(--fs-3); margin: 0 0 var(--space-4); }
+      .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 130px; gap: var(--space-2); }
+      .tile { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+        padding: var(--space-3); display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+        transition: transform .3s var(--ease); overflow: hidden; }
+      .tile:hover { transform: translateY(-4px); }
+      .b-lg { grid-column: span 2; grid-row: span 2; }
+      .b-wide { grid-column: span 2; }
+      .b-tall { grid-row: span 2; }
+      .accent { background: linear-gradient(150deg, var(--accent), #b45309); color: #1a1205; border: none; }
+      .accent .kicker { color: #1a1205; opacity: .7; }
+      .dark { background: var(--color-surface-2); }
+      .kicker { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-dim); }
+      h2 { font-size: clamp(1.6rem, 4vw, 3rem); margin: 0; line-height: 1; }
+      .big { font-size: var(--fs-3); margin: 0; }
+      p { margin: 0; color: var(--color-text-dim); font-size: var(--fs-small); }
+      .accent p { color: #2a1c06; }
+      .swatches { display: flex; gap: 6px; margin-bottom: auto; }
+      .swatches i { width: 26px; height: 26px; border-radius: 8px; }
+      .swatches i:nth-child(1){ background:#f59e0b } .swatches i:nth-child(2){ background:#e9e9f1 }
+      .swatches i:nth-child(3){ background:#1d1d2b } .swatches i:nth-child(4){ background:#b45309 }
+      .back { display: inline-block; margin-top: var(--space-4); color: var(--accent); text-decoration: none; }
+      @media (max-width: 640px){ .bento { grid-template-columns: repeat(2,1fr); } .b-lg,.b-wide{ grid-column: span 2 } }
+    </style>
+  </body>
+</html>
