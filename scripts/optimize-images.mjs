@@ -11,11 +11,10 @@ const A = (p) => join(root, 'assets-incoming', p);
 const S = (slug, name) => join(root, 'sites', slug, 'public', 'img', name);
 
 const jobs = [
-  { src: A('Gemini_Generated_Image_qgwdcqgwdcqgwdcq.png'), dest: S('06-natural-aesthetic', 'hero.webp'), width: 1920, q: 80 },
-  { src: A('Gemini_Generated_Image_57n57857n57857n5.png'), dest: S('11-dark-minimal', 'hero.webp'), width: 2000, q: 80 },
-  { src: A('Gemini_Generated_Image_jsideojsideojsid.png'), dest: S('04-retro-futurism', 'neon.webp'), width: 1500, q: 76 },
-  { src: A('Gemini_Generated_Image_d4ozpd4ozpd4ozpd.png'), dest: S('15-architecture', 'day.webp'), width: 1920, q: 80 },
-  { src: A('Gemini_Generated_Image_xyy3wlxyy3wlxyy3.png'), dest: S('15-architecture', 'night.webp'), width: 1920, q: 80 },
+  // wave 1 (Canva-generated)
+  { src: A('gen-03-sky.png'), dest: S('03-glassmorphism', 'sky.webp'), width: 1920, q: 80 },
+  { src: A('gen-10-nebula.png'), dest: S('10-ai-gradients', 'nebula.webp'), width: 1920, q: 80 },
+  { src: A('gen-09-clay.png'), dest: S('09-claymorphism', 'clay.webp'), width: 1600, q: 82 },
 ];
 
 for (const j of jobs) {

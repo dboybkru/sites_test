@@ -12,6 +12,13 @@ showcase/public/s/
 .env.*
 !.env.example
 
+# key/secret files dropped into the project — NEVER commit
+*.key
+*.pem
+*ключ*
+*secret*.txt
+*key*.txt
+
 # graphify (large, regenerated; lives in parent but ignore defensively)
 graphify-out/
 .graphify_*
