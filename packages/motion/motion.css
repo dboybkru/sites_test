@@ -1,0 +1,36 @@
+/* @lab/motion — переиспользуемые анимации.
+   import '@lab/motion/motion.css'  и навешивай классы: .m-fade-up, .m-float, .m-glow */
+
+@keyframes m-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes m-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes m-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--color-accent, #8b5cf6)); }
+  50%      { filter: drop-shadow(0 0 24px var(--color-accent, #8b5cf6)); }
+}
+@keyframes m-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.m-fade-up {
+  animation: m-fade-up 0.8s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+.m-float { animation: m-float 4s ease-in-out infinite; }
+.m-glow  { animation: m-glow 3s ease-in-out infinite; }
+
+/* поэтапное появление: ставь --m-delay на элементе */
+.m-stagger > * {
+  animation: m-fade-up 0.7s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+  animation-delay: calc(var(--m-i, 0) * 0.08s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-fade-up, .m-float, .m-glow, .m-stagger > * { animation: none !important; }
+}

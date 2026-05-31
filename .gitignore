@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+showcase/public/s/
+
+# deploy / tooling
+.vercel/
+.env
+.env.*
+!.env.example
+
+# graphify (large, regenerated; lives in parent but ignore defensively)
+graphify-out/
+.graphify_*
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.log

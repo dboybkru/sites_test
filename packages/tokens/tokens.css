@@ -1,0 +1,36 @@
+/* @lab/tokens — базовые дизайн-токены (CSS-переменные).
+   Подключи в сайте: import '@lab/tokens/tokens.css'
+   Сайт может переопределить любую переменную локально. */
+:root {
+  /* палитра */
+  --color-bg: #0b0b10;
+  --color-surface: #15151f;
+  --color-surface-2: #1d1d2b;
+  --color-border: #2a2a3a;
+  --color-text: #e9e9f1;
+  --color-text-dim: #a0a0b8;
+  --color-accent: #8b5cf6;
+  --color-accent-2: #22d3ee;
+
+  /* типографика */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  --fs-1: clamp(2.2rem, 5vw, 4rem);
+  --fs-2: clamp(1.5rem, 3vw, 2.2rem);
+  --fs-3: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.85rem;
+
+  /* spacing / радиусы / тени */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+
+  /* анимация */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

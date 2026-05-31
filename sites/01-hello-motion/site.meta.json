@@ -1,0 +1,8 @@
+{
+  "title": "Hello Motion",
+  "description": "Базовая рыба + пресеты анимаций из @lab/motion.",
+  "skill": "motion",
+  "tool": "Astro",
+  "status": "demo",
+  "accent": "#8b5cf6"
+}

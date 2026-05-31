@@ -1,0 +1,12 @@
+{
+  "name": "@lab/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Общие дизайн-токены: цвета, типографика, spacing.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./tokens.css": "./tokens.css"
+  }
+}

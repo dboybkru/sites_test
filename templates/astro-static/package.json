@@ -1,0 +1,17 @@
+{
+  "name": "@site/astro-static-template",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Рыба: лёгкий статичный сайт на Astro. Копируется через `npm run new`.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.6.1",
+    "@lab/tokens": "*",
+    "@lab/motion": "*"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "test-site-design",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Дизайн-лаборатория: много сайтов из общих рыб и фишек, витрина на Vercel.",
+  "type": "module",
+  "workspaces": [
+    "showcase",
+    "packages/*",
+    "sites/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @lab/showcase",
+    "dev:showcase": "npm run dev --workspace @lab/showcase",
+    "build:all": "node scripts/build-all.mjs",
+    "new": "node scripts/new-site.mjs",
+    "preview": "npm run preview --workspace @lab/showcase"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

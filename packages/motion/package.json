@@ -1,0 +1,12 @@
+{
+  "name": "@lab/motion",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Motion-пресеты: keyframes и утилитарные классы анимаций.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./motion.css": "./motion.css"
+  }
+}

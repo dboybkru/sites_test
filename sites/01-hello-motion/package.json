@@ -1,0 +1,17 @@
+{
+  "name": "@site/01-hello-motion",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Первый эксперимент: рыба + motion-пресеты.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.6.1",
+    "@lab/tokens": "*",
+    "@lab/motion": "*"
+  }
+}
