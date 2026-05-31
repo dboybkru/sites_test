@@ -1,12 +1,6 @@
 ---
-import '@lab/tokens/tokens.css';
-import '@lab/motion/motion.css';
-
-const principles = [
-  { n: '01', t: 'МАСШТАБ', d: 'Размер кегля задаёт иерархию быстрее любого цвета.' },
-  { n: '02', t: 'КОНТРАСТ', d: 'Тонкое рядом с жирным. Узкое рядом с широким.' },
-  { n: '03', t: 'РИТМ', d: 'Повтор и пауза. Текст дышит за счёт воздуха.' },
-];
+const base = import.meta.env.BASE_URL;
+const model = `${base}img/model.webp`;
 ---
 
 <!doctype html>
@@ -14,92 +8,80 @@ const principles = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Гипертипографика</title>
+    <title>NOIR — FW/26</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <nav class="nav">
-      <a class="logo" href="#">TYPE/SET</a>
+      <a class="logo" href="#">NOIR</a>
       <div class="links">
-        <a href="#principles">Принципы</a>
-        <a href="#" class="btn">Заказать</a>
+        <a href="#drop">Коллекция</a>
+        <a href="#">Бутики</a>
+        <a href="#" class="btn">В корзину (0)</a>
       </div>
     </nav>
 
-    <main class="hero">
-      <p class="meta m-fade-up">тренд · hyper-type · 2026</p>
-      <h1 class="mega">
-        <span class="line m-fade-up" style="animation-delay:.05s">ШРИФТ —</span>
-        <span class="line outline m-fade-up" style="animation-delay:.15s">ЭТО</span>
-        <span class="line accent m-fade-up" style="animation-delay:.25s">ИНТЕРФЕЙС</span>
-      </h1>
-      <p class="dek m-fade-up" style="animation-delay:.4s">Когда типографика становится главным героем: масштаб, контраст начертаний и ритм несут смысл сильнее иллюстраций.</p>
-      <div class="cta m-fade-up" style="animation-delay:.5s">
-        <a class="btn btn-lg" href="#principles">Смотреть принципы</a>
-        <a class="link" href="/">← на витрину</a>
+    <header class="hero">
+      <div class="hero-type">
+        <p class="season">осень — зима / 26</p>
+        <h1>NO<br>IR</h1>
+        <p class="tag">Архитектура чёрного. Скульптурные силуэты, бескомпромиссная форма.</p>
+        <a href="#drop" class="btn lg">Смотреть дроп →</a>
       </div>
-    </main>
+      <figure class="hero-img"><img src={model} alt="NOIR FW/26 — скульптурный силуэт" loading="eager" /></figure>
+    </header>
 
     <div class="marquee"><div class="track">
-      <span>ДИСПЛЕЙ&nbsp;·&nbsp;КОНТРАСТ&nbsp;·&nbsp;КЕГЛЬ&nbsp;·&nbsp;РИТМ&nbsp;·&nbsp;ВОЗДУХ&nbsp;·&nbsp;</span>
-      <span>ДИСПЛЕЙ&nbsp;·&nbsp;КОНТРАСТ&nbsp;·&nbsp;КЕГЛЬ&nbsp;·&nbsp;РИТМ&nbsp;·&nbsp;ВОЗДУХ&nbsp;·&nbsp;</span>
+      <span>NOIR&nbsp;·&nbsp;FW26&nbsp;·&nbsp;СКУЛЬПТУРА&nbsp;·&nbsp;ЧЁРНЫЙ&nbsp;·&nbsp;ФОРМА&nbsp;·&nbsp;NOIR&nbsp;·&nbsp;FW26&nbsp;·&nbsp;СКУЛЬПТУРА&nbsp;·&nbsp;ЧЁРНЫЙ&nbsp;·&nbsp;ФОРМА&nbsp;·&nbsp;</span>
+      <span>NOIR&nbsp;·&nbsp;FW26&nbsp;·&nbsp;СКУЛЬПТУРА&nbsp;·&nbsp;ЧЁРНЫЙ&nbsp;·&nbsp;ФОРМА&nbsp;·&nbsp;NOIR&nbsp;·&nbsp;FW26&nbsp;·&nbsp;СКУЛЬПТУРА&nbsp;·&nbsp;ЧЁРНЫЙ&nbsp;·&nbsp;ФОРМА&nbsp;·&nbsp;</span>
     </div></div>
 
-    <section id="principles" class="principles">
-      {principles.map((p) => (
-        <article class="pr">
-          <span class="pn">{p.n}</span>
-          <h2>{p.t}</h2>
-          <p>{p.d}</p>
-        </article>
-      ))}
+    <section id="drop" class="drop">
+      <div class="d-num">01 — 03</div>
+      <h2>Капсула из&nbsp;трёх образов</h2>
+      <p>Лимитированный выпуск. Ручная сборка, переработанная шерсть, нумерованные экземпляры. Каждый силуэт — об отказе от лишнего.</p>
+      <a href="#" class="btn lg">Записаться на дроп</a>
     </section>
 
-    <section class="quote">
-      <blockquote>«Хорошая типографика&nbsp;— это <em>интерфейс</em>, которого&nbsp;не&nbsp;замечаешь.»</blockquote>
-    </section>
-
-    <footer>
-      <span class="big">ГОТОВ НАБРАТЬ ГРОМКО?</span>
-      <a class="btn btn-lg" href="#">Начать проект</a>
+    <footer class="foot">
+      <span class="big">NOIR — ТИШИНА В ФОРМЕ</span>
+      <a href="/">← на витрину</a>
     </footer>
 
     <style>
-      :root { --accent: #facc15; --ink: #0c0c0c; --paper: #f4f2ec; }
+      :root { --ink:#0a0a0a; --paper:#f3f0ea; --red:#e4322b; --display:'Archivo Black', system-ui, sans-serif; --body:'Archivo', system-ui, sans-serif; }
       * { box-sizing: border-box; }
-      body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans); overflow-x: hidden; }
-      .btn { display: inline-block; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 800;
-        padding: 12px 24px; border: 3px solid var(--ink); transition: background .15s, color .15s; }
-      .btn:hover { background: var(--accent); color: var(--ink); }
-      .btn-lg { padding: 16px 34px; font-size: 1.1rem; }
-      .link { color: var(--ink); text-decoration: none; font-family: var(--font-mono); align-self: center; }
-      .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5vw; border-bottom: 3px solid var(--ink); }
-      .logo { font-weight: 900; font-family: var(--font-mono); letter-spacing: -.02em; color: var(--ink); text-decoration: none; font-size: 1.2rem; }
-      .links { display: flex; align-items: center; gap: 22px; }
-      .links a:not(.btn) { color: var(--ink); text-decoration: none; font-family: var(--font-mono); }
-      .hero { max-width: 1100px; margin: 0 auto; padding: 8vh 5vw 6vh; }
-      .meta { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .3em; font-size: var(--fs-small); margin: 0 0 var(--space-3); }
-      .mega { margin: 0; line-height: .86; font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; }
-      .line { display: block; font-size: clamp(3rem, 16vw, 11rem); }
-      .outline { color: transparent; -webkit-text-stroke: 2px var(--ink); }
-      .accent { color: var(--accent); -webkit-text-stroke: 2px var(--ink); }
-      .dek { max-width: 540px; margin: var(--space-4) 0 0 auto; font-size: var(--fs-3); line-height: 1.5; text-align: right; }
-      .cta { display: flex; gap: 22px; justify-content: flex-end; margin-top: var(--space-3); flex-wrap: wrap; }
-      .marquee { border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); overflow: hidden; background: var(--accent); }
-      .track { display: inline-flex; white-space: nowrap; animation: scroll 18s linear infinite; }
-      .track span { font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.6rem); padding: 10px 0; text-transform: uppercase; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); overflow-x: hidden; }
+      .btn { display: inline-block; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; padding: 12px 24px; border-radius: 2px; transition: background .15s, color .15s; }
+      .btn:hover { background: var(--red); color: #fff; }
+      .btn.lg { padding: 15px 32px; }
+      .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 5vw; border-bottom: 2px solid var(--ink); position: relative; z-index: 2; }
+      .logo { font-family: var(--display); font-size: 1.5rem; color: var(--ink); text-decoration: none; letter-spacing: .02em; }
+      .links { display: flex; align-items: center; gap: 24px; }
+      .links a:not(.btn) { color: var(--ink); text-decoration: none; font-weight: 500; }
+      .hero { display: grid; grid-template-columns: 1.1fr .9fr; align-items: stretch; border-bottom: 2px solid var(--ink); }
+      .hero-type { padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; }
+      .season { font-weight: 600; letter-spacing: .15em; text-transform: uppercase; margin: 0 0 10px; }
+      h1 { font-family: var(--display); font-size: clamp(5rem, 22vw, 16rem); line-height: .82; margin: 0; letter-spacing: -.02em; }
+      .tag { font-size: 1.15rem; max-width: 380px; margin: 26px 0 28px; line-height: 1.45; }
+      .hero-type .btn { align-self: flex-start; }
+      .hero-img { margin: 0; border-left: 2px solid var(--ink); overflow: hidden; }
+      .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 420px; }
+      .marquee { background: var(--ink); color: var(--paper); overflow: hidden; border-bottom: 2px solid var(--ink); }
+      .track { display: inline-flex; white-space: nowrap; animation: scroll 24s linear infinite; }
+      .track span { font-family: var(--display); font-size: clamp(1.2rem, 3vw, 2rem); padding: 12px 0; }
       @keyframes scroll { to { transform: translateX(-50%); } }
       @media (prefers-reduced-motion: reduce){ .track { animation: none; } }
-      .principles { max-width: 1100px; margin: 0 auto; padding: 9vh 5vw; display: grid; gap: 0; }
-      .pr { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: baseline; padding: 36px 0; border-bottom: 3px solid var(--ink); }
-      .pn { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; }
-      .pr h2 { font-size: clamp(2.4rem, 8vw, 5rem); margin: 0; font-weight: 900; letter-spacing: -.02em; line-height: 1; }
-      .pr p { grid-column: 2; margin: 14px 0 0; font-size: var(--fs-3); max-width: 480px; }
-      .quote { padding: 10vh 5vw; background: var(--ink); color: var(--paper); }
-      blockquote { max-width: 900px; margin: 0 auto; font-size: clamp(1.6rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -.01em; }
-      blockquote em { color: var(--accent); font-style: normal; }
-      footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 7vh 5vw; }
-      footer .big { font-size: clamp(1.4rem, 5vw, 2.6rem); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; max-width: 640px; }
-      @media (max-width: 640px){ .dek, .cta { text-align: left; margin-left: 0; justify-content: flex-start; } .links a:not(.btn){ display:none; } }
+      .drop { max-width: 760px; margin: 0 auto; padding: 12vh 5vw; text-align: center; }
+      .d-num { font-family: var(--display); color: var(--red); margin-bottom: 16px; }
+      .drop h2 { font-family: var(--display); font-size: clamp(2rem, 6vw, 4rem); line-height: 1; margin: 0 0 20px; }
+      .drop p { font-size: 1.15rem; line-height: 1.6; max-width: 480px; margin: 0 auto 30px; }
+      .foot { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 6vh 5vw; border-top: 2px solid var(--ink); flex-wrap: wrap; }
+      .foot .big { font-family: var(--display); font-size: clamp(1.2rem,4vw,2.2rem); }
+      .foot a { color: var(--ink); text-decoration: none; font-weight: 600; }
+      @media (max-width: 760px){ .hero { grid-template-columns: 1fr; } .hero-img { border-left: none; border-top: 2px solid var(--ink); } .links a:not(.btn){ display:none; } }
     </style>
   </body>
 </html>

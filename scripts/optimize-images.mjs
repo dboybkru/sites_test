@@ -11,10 +11,11 @@ const A = (p) => join(root, 'assets-incoming', p);
 const S = (slug, name) => join(root, 'sites', slug, 'public', 'img', name);
 
 const jobs = [
-  // wave 1 (Canva-generated)
-  { src: A('gen-03-sky.png'), dest: S('03-glassmorphism', 'sky.webp'), width: 1920, q: 80 },
-  { src: A('gen-10-nebula.png'), dest: S('10-ai-gradients', 'nebula.webp'), width: 1920, q: 80 },
-  { src: A('gen-09-clay.png'), dest: S('09-claymorphism', 'clay.webp'), width: 1600, q: 82 },
+  // wave 2 (Canva-generated)
+  { src: A('gen-01-runner.png'), dest: S('01-hello-motion', 'runner.webp'), width: 1920, q: 80 },
+  { src: A('gen-02-fintech.png'), dest: S('02-bento-box', 'chart.webp'), width: 1500, q: 80 },
+  { src: A('gen-05-fashion.png'), dest: S('05-hypertypography', 'model.webp'), width: 1500, q: 82 },
+  { src: A('gen-07-headphones.png'), dest: S('07-spatial-3d', 'headphones.webp'), width: 1400, q: 82 },
 ];
 
 for (const j of jobs) {

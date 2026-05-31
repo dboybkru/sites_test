@@ -1,17 +1,16 @@
 ---
-import '@lab/tokens/tokens.css';
 import '@lab/motion/motion.css';
-
-const features = [
-  { t: 'fade-up', d: 'Плавное появление снизу' },
-  { t: 'float', d: 'Бесконечное парение' },
-  { t: 'glow', d: 'Пульсация свечения' },
-  { t: 'stagger', d: 'Поэтапный выход списка' },
+const base = import.meta.env.BASE_URL;
+const runner = `${base}img/runner.webp`;
+const stats = [
+  { n: '2.1М', l: 'пробежек в неделю' },
+  { n: '4.9★', l: 'в App Store' },
+  { n: '−18%', l: 'средний пульс покоя' },
 ];
-const steps = [
-  { n: '1', t: 'Подключи', d: 'import "@lab/motion/motion.css"' },
-  { n: '2', t: 'Навесь класс', d: 'class="m-fade-up"' },
-  { n: '3', t: 'Готово', d: 'Анимация работает, reduced-motion учтён' },
+const features = [
+  { ic: '🫀', t: 'Зоны пульса', d: 'Живая подсказка темпа: не загоняй себя и не ленись — беги в своей зоне.' },
+  { ic: '🗺️', t: 'Маршруты рядом', d: 'Лучшие беговые петли вокруг тебя — по покрытию, рельефу и виду.' },
+  { ic: '🔥', t: 'Мягкие цели', d: 'План адаптируется под твою форму. Пропуск — не провал, а пауза.' },
 ];
 ---
 
@@ -20,82 +19,76 @@ const steps = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello Motion</title>
+    <title>Stride — беги. дыши. повторяй.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <nav class="nav">
-      <a class="logo" href="#"><span class="ld"></span> Motion</a>
+      <a class="logo" href="#">▸ Stride</a>
       <div class="links">
-        <a href="#presets">Пресеты</a><a href="#how">Как</a>
-        <a href="#" class="btn btn-sm">Документация</a>
+        <a href="#features">Возможности</a>
+        <a href="#" class="btn">Скачать</a>
       </div>
     </nav>
 
-    <header class="hero">
-      <div class="orb m-float m-glow" aria-hidden="true"></div>
-      <h1 class="m-fade-up">Hello&nbsp;Motion</h1>
-      <p class="lead m-fade-up" style="animation-delay:.15s">Первый эксперимент лаборатории. Рыба на Astro + пресеты из <code>@lab/motion</code>: анимации в один класс.</p>
-      <div class="cta m-fade-up" style="animation-delay:.3s">
-        <a class="btn btn-lg" href="#presets">Смотреть пресеты</a>
-        <a class="btn btn-lg ghost" href="/">На витрину</a>
+    <header class="hero" style={`background-image: linear-gradient(90deg, rgba(15,8,5,.72), rgba(15,8,5,.25) 55%, rgba(15,8,5,.5)), url(${runner})`}>
+      <div class="hero-inner m-fade-up">
+        <span class="eyebrow">бег · трекинг · восстановление</span>
+        <h1>Беги.<br>Дыши.<br>Повторяй.</h1>
+        <p class="lead">Stride — беговой трекер, который подстраивается под тебя. Темп, пульс и маршруты — в одном спокойном интерфейсе.</p>
+        <div class="cta">
+          <a href="#" class="btn lg">App Store</a>
+          <a href="#" class="btn lg ghost">Google Play</a>
+        </div>
       </div>
     </header>
 
-    <section id="presets" class="grid m-stagger">
-      {features.map((f, i) => (
-        <div class="card" style={`--m-i:${i}`}>
-          <span class="mono">.m-{f.t}</span>
-          <p>{f.d}</p>
-        </div>
+    <section class="stats">
+      {stats.map((s) => (<div><b>{s.n}</b><span>{s.l}</span></div>))}
+    </section>
+
+    <section id="features" class="features">
+      {features.map((f) => (
+        <article class="feat"><span class="fi">{f.ic}</span><h3>{f.t}</h3><p>{f.d}</p></article>
       ))}
     </section>
 
-    <section id="how" class="steps">
-      <h2>Три шага</h2>
-      <div class="steps-row">
-        {steps.map((s) => (
-          <article class="step"><span class="sn">{s.n}</span><h3>{s.t}</h3><p>{s.d}</p></article>
-        ))}
-      </div>
+    <section class="cta-band">
+      <h2>Первый километр — уже сегодня</h2>
+      <a href="#" class="btn lg">Скачать бесплатно</a>
     </section>
 
-    <footer><span>Hello Motion · @lab/motion · 2026</span><a href="/">← на витрину</a></footer>
+    <footer class="foot"><span>▸ Stride · 2026</span><a href="/">← на витрину</a></footer>
 
     <style>
+      :root { --bg:#0f0805; --text:#fff; --dim:#c9bcae; --accent:#ff7a45; --font:'Sora', system-ui, sans-serif; }
       * { box-sizing: border-box; }
-      body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans);
-        background-image: radial-gradient(70% 45% at 50% 0%, rgba(139,92,246,.20), transparent 70%); }
-      .btn { display: inline-block; text-decoration: none; font-weight: 700; color: #fff;
-        background: linear-gradient(135deg, var(--color-accent), #6d28d9); border-radius: 12px; padding: 11px 22px; transition: transform .15s; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+      .btn { display: inline-block; text-decoration: none; font-weight: 600; color: #1a0d06; background: var(--accent); border-radius: 12px; padding: 11px 22px; transition: transform .15s; }
       .btn:hover { transform: translateY(-2px); }
-      .btn-sm { padding: 8px 16px; font-size: .9rem; }
-      .btn-lg { padding: 14px 28px; }
-      .btn.ghost { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
-      .nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 6vw; }
-      .logo { display: flex; align-items: center; gap: 10px; color: var(--color-text); text-decoration: none; font-weight: 800; }
-      .ld { width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--color-accent-2), var(--color-accent)); }
-      .links { display: flex; align-items: center; gap: 22px; }
-      .links a:not(.btn) { color: var(--color-text-dim); text-decoration: none; font-size: .92rem; }
-      .hero { max-width: 760px; margin: 0 auto; text-align: center; padding: 12vh 6vw 8vh; position: relative; }
-      .orb { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto var(--space-3);
-        background: radial-gradient(circle at 30% 30%, var(--color-accent-2), var(--color-accent)); }
-      h1 { font-size: var(--fs-1); margin: 0 0 var(--space-2); }
-      .lead { color: var(--color-text-dim); max-width: 480px; margin: 0 auto; font-size: var(--fs-3); }
-      code { font-family: var(--font-mono); background: var(--color-surface-2); padding: 2px 7px; border-radius: 6px; }
-      .cta { display: flex; gap: 14px; justify-content: center; margin-top: var(--space-3); flex-wrap: wrap; }
-      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-2); max-width: 900px; margin: 0 auto; padding: 2vh 6vw; }
-      .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-3); transition: transform .2s, border-color .2s; }
-      .card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
-      .mono { font-family: var(--font-mono); color: var(--color-accent-2); }
-      .card p { color: var(--color-text-dim); margin: var(--space-1) 0 0; font-size: var(--fs-small); }
-      .steps { max-width: 900px; margin: 0 auto; padding: 8vh 6vw; }
-      .steps h2 { text-align: center; font-size: clamp(1.6rem,4vw,2.4rem); margin: 0 0 var(--space-4); }
-      .steps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: var(--space-2); }
-      .step { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-3); }
-      .sn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--color-accent); color: #fff; font-weight: 800; }
-      .step h3 { margin: 12px 0 6px; } .step p { margin: 0; color: var(--color-text-dim); font-size: var(--fs-small); font-family: var(--font-mono); }
-      footer { display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; padding: 5vh 6vw; color: var(--color-text-dim); font-size: var(--fs-small); }
-      footer a { color: var(--color-accent); text-decoration: none; }
+      .btn.lg { padding: 15px 30px; font-size: 1.05rem; }
+      .btn.ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+      .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 22px 6vw; }
+      .logo { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.3rem; }
+      .links { display: flex; align-items: center; gap: 24px; }
+      .links a:not(.btn) { color: rgba(255,255,255,.85); text-decoration: none; }
+      .hero { position: relative; min-height: 100vh; background-size: cover; background-position: center; display: flex; align-items: center; }
+      .hero-inner { max-width: 600px; padding: 0 6vw; }
+      .eyebrow { color: var(--accent); font-weight: 600; font-size: .82rem; letter-spacing: .2em; text-transform: uppercase; }
+      h1 { font-size: clamp(3rem, 9vw, 6rem); font-weight: 800; line-height: .98; margin: 18px 0; letter-spacing: -.03em; }
+      .lead { font-size: 1.2rem; line-height: 1.6; color: var(--dim); max-width: 440px; margin: 0 0 30px; }
+      .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+      .stats { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; padding: 8vh 6vw; }
+      .stats div { text-align: center; } .stats b { display: block; font-size: 2.6rem; font-weight: 700; color: var(--accent); } .stats span { color: var(--dim); font-size: .9rem; }
+      .features { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 16px; max-width: 1040px; margin: 0 auto; padding: 0 6vw 8vh; }
+      .feat { background: #1a0f0a; border: 1px solid #2c1d14; border-radius: 20px; padding: 28px; transition: transform .2s, border-color .2s; }
+      .feat:hover { transform: translateY(-5px); border-color: var(--accent); }
+      .fi { font-size: 1.7rem; } .feat h3 { margin: 12px 0 8px; font-size: 1.2rem; } .feat p { margin: 0; color: var(--dim); line-height: 1.6; }
+      .cta-band { text-align: center; padding: 4vh 6vw 10vh; } .cta-band h2 { font-size: clamp(1.8rem,5vw,2.8rem); margin: 0 0 26px; }
+      .foot { display: flex; align-items: center; justify-content: space-between; max-width: 1040px; margin: 0 auto; padding: 4vh 6vw; color: var(--dim); font-size: .9rem; border-top: 1px solid #2c1d14; }
+      .foot a { color: var(--accent); text-decoration: none; }
       @media (max-width: 640px){ .links a:not(.btn){ display:none; } }
     </style>
   </body>
