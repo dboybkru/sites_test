@@ -34,14 +34,17 @@ npm run build:all           # собрать все сайты + витрину 
 - **Показать другим** — деплой `showcase/dist` на Vercel → одна публичная ссылка, превью на каждый коммит.
 - **Продать** — каждый `sites/*` самодостаточен: отдаёшь одну папку.
 
-## Деплой (Vercel)
+## Деплой (Yandex Object Storage)
 
-Проект уже сконфигурирован (`vercel.json`): build = `npm run build:all`, output = `showcase/dist`.
+Хостинг в РФ без VPN. Статика `showcase/dist` заливается в бакет с включённым «хостингом сайта».
 
 ```bash
-vercel        # превью-деплой
-vercel --prod # прод
+npm run build:all   # собрать витрину + сайты
+npm run deploy:yc   # залить в Yandex Object Storage (нужен .env с ключами)
 ```
+
+Разовая настройка бакета и ключей — в [docs/DEPLOY-YANDEX.md](docs/DEPLOY-YANDEX.md).
+Сайт открывается по `https://<бакет>.website.yandexcloud.net` (сайты под `/s/<slug>/`).
 
 ## Граф (graphify)
 
