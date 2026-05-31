@@ -1,6 +1,16 @@
 ---
 import '@lab/tokens/tokens.css';
 import '@lab/motion/motion.css';
+
+const cards = [
+  { h: 'Blur', p: 'backdrop-filter: blur(18px) — фон «замораживается» под панелью.' },
+  { h: 'Depth', p: 'Слои прозрачности создают глубину без скевоморфизма.' },
+  { h: 'Light', p: 'Светлая рамка сверху имитирует блик на кромке стекла.' },
+];
+const plans = [
+  { t: 'Старт', price: '0', f: ['1 проект', 'Базовые эффекты'] },
+  { t: 'Pro', price: '690', f: ['Безлимит', 'Своя палитра', 'Экспорт'], hot: true },
+];
 ---
 
 <!doctype html>
@@ -11,50 +21,81 @@ import '@lab/motion/motion.css';
     <title>Glassmorphism</title>
   </head>
   <body>
-    <div class="blob b1 m-float"></div>
-    <div class="blob b2 m-float"></div>
-    <div class="blob b3 m-float"></div>
+    <div class="blob b1 m-float" aria-hidden="true"></div>
+    <div class="blob b2 m-float" aria-hidden="true"></div>
+    <div class="blob b3 m-float" aria-hidden="true"></div>
 
-    <main>
-      <section class="glass hero m-fade-up">
-        <p class="eyebrow">тренд · glassmorphism</p>
-        <h1>Сквозь матовое стекло</h1>
-        <p class="lead">Полупрозрачные панели с размытием фона, тонкой рамкой и мягкой тенью. Цвет даёт фон, не панель.</p>
-      </section>
+    <nav class="nav glass">
+      <a class="logo" href="#">◍ Glass</a>
+      <div class="links">
+        <a href="#features">Эффекты</a><a href="#pricing">Цены</a>
+        <a href="#" class="btn">Войти</a>
+      </div>
+    </nav>
 
-      <section class="cards m-stagger">
-        <article class="glass card" style="--m-i:0"><h3>Blur</h3><p>backdrop-filter: blur(18px) — фон «замораживается» под панелью.</p></article>
-        <article class="glass card" style="--m-i:1"><h3>Depth</h3><p>Слои прозрачности создают ощущение глубины без скевоморфизма.</p></article>
-        <article class="glass card" style="--m-i:2"><h3>Light</h3><p>Светлая рамка сверху имитирует блик на кромке стекла.</p></article>
-      </section>
+    <header class="hero glass m-fade-up">
+      <p class="eyebrow">тренд · glassmorphism</p>
+      <h1>Сквозь матовое стекло</h1>
+      <p class="lead">Полупрозрачные панели с размытием фона, тонкой рамкой и мягкой тенью. Цвет даёт фон, не панель.</p>
+      <div class="cta">
+        <a class="btn btn-lg" href="#pricing">Выбрать план</a>
+        <a class="btn btn-lg ghost" href="/">На витрину</a>
+      </div>
+    </header>
 
-      <a class="back" href="/">← на витрину</a>
-    </main>
+    <section id="features" class="cards">
+      {cards.map((c) => (<article class="glass card"><h3>{c.h}</h3><p>{c.p}</p></article>))}
+    </section>
+
+    <section id="pricing" class="pricing">
+      {plans.map((pl) => (
+        <article class={`glass plan ${pl.hot ? 'hot' : ''}`}>
+          {pl.hot && <span class="tag">популярно</span>}
+          <h3>{pl.t}</h3>
+          <p class="price">{pl.price}<span> ₽/мес</span></p>
+          <ul>{pl.f.map((x) => (<li>✓ {x}</li>))}</ul>
+          <a class="btn" href="#">Выбрать</a>
+        </article>
+      ))}
+    </section>
+
+    <footer><span>◍ Glass · 2026</span><a href="/">← на витрину</a></footer>
 
     <style>
       :root { --accent: #22d3ee; }
       * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; color: #f3f5ff; font-family: var(--font-sans);
-        background: #0a0a18; overflow-x: hidden; }
+      body { margin: 0; min-height: 100vh; color: #f3f5ff; font-family: var(--font-sans); background: #0a0a18; overflow-x: hidden; }
       .blob { position: fixed; border-radius: 50%; filter: blur(70px); opacity: .8; z-index: 0; }
       .b1 { width: 420px; height: 420px; background: #ec4899; top: -80px; left: -60px; }
       .b2 { width: 380px; height: 380px; background: #22d3ee; bottom: -100px; right: -40px; animation-delay: 1s; }
-      .b3 { width: 300px; height: 300px; background: #8b5cf6; top: 40%; left: 45%; animation-delay: 2s; }
-      main { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: var(--space-5) var(--space-3); }
-      .glass { background: rgba(255,255,255,.08); backdrop-filter: blur(18px) saturate(140%);
-        -webkit-backdrop-filter: blur(18px) saturate(140%);
-        border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-lg);
-        box-shadow: 0 8px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25); }
-      .hero { padding: var(--space-4); text-align: center; margin-bottom: var(--space-4); }
+      .b3 { width: 300px; height: 300px; background: #8b5cf6; top: 45%; left: 40%; animation-delay: 2s; }
+      .glass { background: rgba(255,255,255,.08); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+        border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-lg); box-shadow: 0 8px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25); }
+      nav, header, section, footer { position: relative; z-index: 1; }
+      .btn { display: inline-block; text-decoration: none; font-weight: 700; color: #06121a; background: var(--accent); border-radius: 12px; padding: 10px 20px; transition: transform .15s; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-lg { padding: 14px 26px; }
+      .btn.ghost { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+      .nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; margin: 16px 4vw; }
+      .logo { color: #fff; text-decoration: none; font-weight: 800; }
+      .links { display: flex; align-items: center; gap: 20px; }
+      .links a:not(.btn) { color: rgba(243,245,255,.8); text-decoration: none; }
+      .hero { max-width: 760px; margin: 4vh auto; padding: var(--space-5) var(--space-4); text-align: center; }
       .eyebrow { font-family: var(--font-mono); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; font-size: var(--fs-small); margin: 0 0 var(--space-1); }
       h1 { font-size: var(--fs-1); margin: 0 0 var(--space-2); }
-      .lead { color: rgba(243,245,255,.8); max-width: 540px; margin: 0 auto; font-size: var(--fs-3); }
-      .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: var(--space-2); }
-      .card { padding: var(--space-3); }
-      h3 { margin: 0 0 var(--space-1); }
-      p { margin: 0; }
-      .card p { color: rgba(243,245,255,.78); font-size: var(--fs-small); }
-      .back { display: inline-block; margin-top: var(--space-4); color: var(--accent); text-decoration: none; }
+      .lead { color: rgba(243,245,255,.82); max-width: 520px; margin: 0 auto var(--space-3); font-size: var(--fs-3); }
+      .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: var(--space-2); max-width: 920px; margin: 4vh auto; padding: 0 4vw; }
+      .card { padding: var(--space-3); } .card h3 { margin: 0 0 var(--space-1); } .card p { margin: 0; color: rgba(243,245,255,.78); font-size: var(--fs-small); }
+      .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: var(--space-3); max-width: 720px; margin: 6vh auto; padding: 0 4vw; }
+      .plan { padding: var(--space-4); text-align: center; position: relative; }
+      .plan.hot { border-color: var(--accent); }
+      .tag { position: absolute; top: 14px; right: 14px; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: #06121a; background: var(--accent); border-radius: 999px; padding: 3px 10px; }
+      .plan h3 { margin: 0 0 var(--space-1); } .price { font-size: 2.4rem; font-weight: 800; margin: 0 0 var(--space-2); } .price span { font-size: 1rem; font-weight: 500; opacity: .7; }
+      .plan ul { list-style: none; padding: 0; margin: 0 0 var(--space-3); display: grid; gap: 8px; color: rgba(243,245,255,.85); }
+      footer { display: flex; justify-content: space-between; align-items: center; max-width: 920px; margin: 0 auto; padding: 4vh 4vw; color: rgba(243,245,255,.6); font-size: var(--fs-small); }
+      footer a { color: var(--accent); text-decoration: none; }
+      @media (max-width: 640px){ .links a:not(.btn){ display:none; } }
     </style>
   </body>
 </html>
