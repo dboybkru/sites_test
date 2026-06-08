@@ -1,6 +1,6 @@
 {
   "title": "Hello Motion",
-  "description": "Базовая рыба + пресеты анимаций из @lab/motion.",
+  "description": "Плавные появления и микроанимации с первого экрана — лёгкая основа, на которой строится любой живой сайт.",
   "skill": "motion",
   "tool": "Astro",
   "status": "demo",

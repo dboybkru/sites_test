@@ -1,4 +1,5 @@
 ---
+import '@lab/motion/motion.css';
 const base = import.meta.env.BASE_URL;
 const nebula = `${base}img/nebula.webp`;
 const logos = ['stellar', 'quantix', 'northwind', 'lumen', 'vega'];
@@ -23,41 +24,52 @@ const stats = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
-    <div class="bg" style={`background-image: linear-gradient(180deg, rgba(7,6,15,.35), rgba(7,6,15,.8) 70%, #07060f), url(${nebula})`}></div>
+    <!-- Живой mesh/aurora-фон: цветные блобы в постоянном движении (CSS-анимация) -->
+    <div class="aurora" aria-hidden="true">
+      <span class="blob b1"></span>
+      <span class="blob b2"></span>
+      <span class="blob b3"></span>
+      <span class="blob b4"></span>
+      <span class="blob b5"></span>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="bg" style={`background-image: url(${nebula})`} aria-hidden="true"></div>
+    <div class="scrim" aria-hidden="true"></div>
 
-    <nav class="nav">
+    <nav class="nav" data-reveal>
       <a class="logo" href="#">✦ Nebula</a>
       <div class="nav-right">
         <a href="#features">Платформа</a>
         <a href="#">Цены</a>
-        <a href="#" class="btn">Запросить доступ</a>
+        <a href="#" class="btn" data-magnetic>Запросить доступ</a>
       </div>
     </nav>
 
     <header class="hero">
-      <span class="chip">● приватный бета-доступ открыт</span>
-      <h1>Интеллект, который<br>видит дальше</h1>
-      <p class="lead">Nebula — это рассуждающая модель с памятью на миллион токенов. Подключите свои данные и получайте ответы по фактам, а не по догадкам.</p>
-      <form class="prompt" onsubmit="return false">
+      <span class="chip" data-reveal style="--d:0">● приватный бета-доступ открыт</span>
+      <h1 data-reveal style="--d:1">Интеллект, который<br>видит дальше</h1>
+      <p class="lead" data-reveal style="--d:2">Nebula — это рассуждающая модель с памятью на миллион токенов. Подключите свои данные и получайте ответы по фактам, а не по догадкам.</p>
+      <form class="prompt" data-reveal style="--d:3" onsubmit="return false">
         <span class="pmark">✦</span>
         <input type="text" placeholder="Спросите Nebula что угодно…" aria-label="Запрос" />
-        <button type="submit">Спросить →</button>
+        <button type="submit" data-magnetic>Спросить →</button>
       </form>
-      <div class="logos">
+      <div class="logos" data-reveal style="--d:4">
         <span>Уже доверяют:</span>
         {logos.map((l) => (<b>{l}</b>))}
       </div>
     </header>
 
     <section class="stats">
-      {stats.map((s) => (<div><b>{s.n}</b><span>{s.l}</span></div>))}
+      {stats.map((s, i) => (<div data-reveal style={`--d:${i}`}><b>{s.n}</b><span>{s.l}</span></div>))}
     </section>
 
     <section id="features" class="features">
-      {features.map((f) => (
-        <article class="feat">
+      {features.map((f, i) => (
+        <article class="feat" data-reveal data-tilt style={`--d:${i}`}>
           <span class="fi">{f.ic}</span>
           <h3>{f.t}</h3>
           <p>{f.d}</p>
@@ -65,9 +77,9 @@ const stats = [
       ))}
     </section>
 
-    <section class="cta-band">
+    <section class="cta-band" data-reveal>
       <h2>Готовы подключить свой интеллект?</h2>
-      <a href="#" class="btn lg">Запросить ранний доступ</a>
+      <a href="#" class="btn lg" data-magnetic>Запросить ранний доступ</a>
     </section>
 
     <footer class="foot"><span>✦ Nebula AI · 2026</span><a href="/">← на витрину</a></footer>
@@ -76,10 +88,31 @@ const stats = [
       :root { --acc: #c4b5fd; --acc2: #67e8f9; --font: 'Space Grotesk', system-ui, sans-serif; }
       * { box-sizing: border-box; }
       body { margin: 0; min-height: 100vh; background: #07060f; color: #f3f1ff; font-family: var(--font); overflow-x: hidden; }
-      .bg { position: fixed; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+
+      /* ── Aurora mesh: блобы в постоянном движении ── */
+      .aurora { position: fixed; inset: -25vmax; z-index: 0; overflow: hidden; filter: blur(70px) saturate(150%); pointer-events: none; }
+      .blob { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; mix-blend-mode: screen; opacity: .6; will-change: transform; }
+      .b1 { background: radial-gradient(circle at 50% 50%, #7c3aed 0%, transparent 60%); top: -10%; left: -5%;  animation: drift1 22s ease-in-out infinite; }
+      .b2 { background: radial-gradient(circle at 50% 50%, #22d3ee 0%, transparent 60%); top: 0%;   right: -10%; animation: drift2 26s ease-in-out infinite; }
+      .b3 { background: radial-gradient(circle at 50% 50%, #d946ef 0%, transparent 62%); bottom: -20%; left: 10%; animation: drift3 30s ease-in-out infinite; }
+      .b4 { background: radial-gradient(circle at 50% 50%, #3b82f6 0%, transparent 60%); bottom: -15%; right: 0%; animation: drift4 24s ease-in-out infinite; }
+      .b5 { background: radial-gradient(circle at 50% 50%, #f472b6 0%, transparent 64%); top: 25%; left: 30%; width: 44vmax; height: 44vmax; animation: drift5 19s ease-in-out infinite; }
+      @keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(18vw, 12vh) scale(1.25); } }
+      @keyframes drift2 { 0%,100% { transform: translate(0,0) scale(1.1); } 50% { transform: translate(-16vw, 16vh) scale(.85); } }
+      @keyframes drift3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(12vw, -14vh) scale(1.2); } }
+      @keyframes drift4 { 0%,100% { transform: translate(0,0) scale(.95); } 50% { transform: translate(-14vw, -10vh) scale(1.15); } }
+      @keyframes drift5 { 0%,100% { transform: translate(0,0) scale(1.05); } 50% { transform: translate(10vw, 14vh) scale(.8); } }
+
+      /* плёночное зерно поверх градиентов */
+      .grain { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      /* исходная nebula.webp — лёгкая текстура глубины поверх блобов */
+      .bg { position: fixed; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: .22; mix-blend-mode: screen; }
+      .scrim { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(78% 60% at 50% 30%, rgba(7,6,15,.68) 0%, rgba(7,6,15,.32) 52%, transparent 80%), linear-gradient(180deg, rgba(7,6,15,.30), transparent 26%, transparent 68%, rgba(7,6,15,.5)); }
+
       nav, header, section, footer { position: relative; z-index: 1; }
-      .btn { display: inline-block; text-decoration: none; font-weight: 600; color: #0a0612; background: #fff; border-radius: 10px; padding: 11px 20px; transition: transform .15s; }
-      .btn:hover { transform: translateY(-2px); }
+      .btn { display: inline-block; text-decoration: none; font-weight: 600; color: #0a0612; background: #fff; border-radius: 10px; padding: 11px 20px; transition: transform .25s var(--ease, cubic-bezier(.22,1,.36,1)), box-shadow .25s; will-change: transform; }
+      .btn:hover { box-shadow: 0 14px 34px -12px var(--acc); }
       .btn.lg { padding: 15px 30px; font-size: 1.05rem; }
 
       .nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 6vw; }
@@ -97,7 +130,7 @@ const stats = [
       .pmark { color: var(--acc2); }
       .prompt input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-family: var(--font); font-size: 1rem; padding: 10px 0; }
       .prompt input::placeholder { color: rgba(243,241,255,.5); }
-      .prompt button { background: linear-gradient(135deg,#a78bfa,#67e8f9); color: #0a0612; border: none; font-weight: 700; font-family: var(--font); padding: 12px 20px; border-radius: 11px; cursor: pointer; }
+      .prompt button { background: linear-gradient(135deg,#a78bfa,#67e8f9); color: #0a0612; border: none; font-weight: 700; font-family: var(--font); padding: 12px 20px; border-radius: 11px; cursor: pointer; will-change: transform; }
       .logos { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; margin-top: 34px; color: rgba(243,241,255,.5); font-size: .9rem; }
       .logos b { color: rgba(243,241,255,.8); font-weight: 600; letter-spacing: .02em; }
 
@@ -108,8 +141,8 @@ const stats = [
       .stats span { color: rgba(243,241,255,.6); font-size: .9rem; }
 
       .features { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 18px; max-width: 1040px; margin: 0 auto; padding: 0 6vw 8vh; }
-      .feat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 28px; backdrop-filter: blur(10px); transition: transform .2s, border-color .2s; }
-      .feat:hover { transform: translateY(-5px); border-color: var(--acc); }
+      .feat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 28px; backdrop-filter: blur(10px); transition: transform .25s var(--ease, cubic-bezier(.22,1,.36,1)), border-color .25s; transform-style: preserve-3d; }
+      .feat:hover { border-color: var(--acc); }
       .fi { font-size: 1.6rem; color: var(--acc2); }
       .feat h3 { margin: 12px 0 8px; font-size: 1.25rem; font-weight: 600; }
       .feat p { margin: 0; color: #cfc6e8; line-height: 1.6; }
@@ -121,6 +154,15 @@ const stats = [
       .foot a { color: var(--acc2); text-decoration: none; }
 
       @media (max-width: 640px){ .nav-right a:not(.btn){ display: none; } .prompt button { padding: 12px 14px; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .blob { animation: none !important; }
+      }
     </style>
+
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+    </script>
   </body>
 </html>

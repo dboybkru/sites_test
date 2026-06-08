@@ -34,3 +34,19 @@
 @media (prefers-reduced-motion: reduce) {
   .m-fade-up, .m-float, .m-glow, .m-stagger > * { animation: none !important; }
 }
+
+/* ── Scroll-reveal (для @lab/motion initMotion). Контент виден без JS;
+   прячем только когда на <html> есть класс .js (его ставит is:inline-скрипт). ── */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 0.7s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}

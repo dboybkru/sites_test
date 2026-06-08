@@ -1,4 +1,5 @@
 ---
+import '@lab/motion/motion.css';
 // Material Design 3 — CSS-only реализация на токенах --md-sys-* (SSR-безопасно, без web-components).
 const cards = [
   { icon: 'palette', title: 'Динамический цвет', body: 'Вся схема выводится из одного seed-цвета и держит тональные пары.' },
@@ -18,13 +19,14 @@ const chips = ['Дизайн', 'Токены', 'Доступность', 'Ада
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <header class="appbar">
       <span class="msym">spa</span>
       <h1 class="appbar-title">Material 3</h1>
       <span class="spacer"></span>
-      <button class="icon-btn" aria-label="Тема"><span class="msym">dark_mode</span></button>
+      <button id="themeBtn" class="icon-btn" aria-label="Переключить тему"><span id="themeIcon" class="msym">dark_mode</span></button>
       <button class="icon-btn" aria-label="Аккаунт"><span class="msym">account_circle</span></button>
     </header>
 
@@ -32,15 +34,15 @@ const chips = ['Дизайн', 'Токены', 'Доступность', 'Ада
       <section class="hero">
         <div class="hero-copy">
           <span class="label">design system</span>
-          <h2 class="display">Personal. Adaptive. Expressive.</h2>
-          <p class="body-l">Демонстрация Material Design 3 на чистых токенах <code>--md-sys-*</code>: тональные поверхности, корректные цветовые пары, формы и типошкала.</p>
-          <div class="btn-row">
+          <h2 class="display" data-reveal style="--d:0">Personal. Adaptive. Expressive.</h2>
+          <p class="body-l" data-reveal style="--d:1">Демонстрация Material Design 3 на чистых токенах <code>--md-sys-*</code>: тональные поверхности, корректные цветовые пары, формы и типошкала.</p>
+          <div class="btn-row" data-reveal style="--d:2">
             <button class="md-btn filled"><span class="msym">rocket_launch</span> Начать</button>
             <button class="md-btn tonal">Подробнее</button>
             <button class="md-btn outlined">Документация</button>
             <button class="md-btn text">Позже</button>
           </div>
-          <div class="chips">
+          <div class="chips" data-reveal style="--d:3">
             {chips.map((c, i) => (
               <button class={`chip ${i === 0 ? 'selected' : ''}`}>
                 {i === 0 && <span class="msym chk">check</span>}{c}
@@ -60,7 +62,7 @@ const chips = ['Дизайн', 'Токены', 'Доступность', 'Ада
 
       <section class="cards">
         {cards.map((c) => (
-          <article class="md-card">
+          <article class="md-card" data-reveal style={`--d:${cards.indexOf(c)}`}>
             <div class="card-media"><span class="msym lg">{c.icon}</span></div>
             <div class="card-body">
               <h3 class="title-m">{c.title}</h3>
@@ -74,7 +76,7 @@ const chips = ['Дизайн', 'Токены', 'Доступность', 'Ада
         ))}
       </section>
 
-      <section class="form-block">
+      <section class="form-block" data-reveal>
         <h3 class="headline">Связаться</h3>
         <div class="field">
           <input id="name" type="text" placeholder=" " />
@@ -222,6 +224,62 @@ const chips = ['Дизайн', 'Токены', 'Доступность', 'Ада
 
       .back { display: inline-block; margin-top: 32px; color: var(--md-sys-color-primary); text-decoration: none; }
       @media (max-width: 720px){ .hero { grid-template-columns: 1fr; padding: 28px; } }
+
+      /* ── Ручной переключатель тем (перекрывает авто prefers-color-scheme) ── */
+      :root[data-theme="light"] {
+        --md-sys-color-primary: #6750A4; --md-sys-color-on-primary: #FFFFFF;
+        --md-sys-color-primary-container: #EADDFF; --md-sys-color-on-primary-container: #21005D;
+        --md-sys-color-secondary-container: #E8DEF8; --md-sys-color-on-secondary-container: #1D192B;
+        --md-sys-color-surface: #FEF7FF; --md-sys-color-on-surface: #1D1B20; --md-sys-color-on-surface-variant: #49454F;
+        --md-sys-color-surface-container-low: #F7F2FA; --md-sys-color-surface-container: #F3EDF7;
+        --md-sys-color-surface-container-high: #ECE6F0; --md-sys-color-surface-container-highest: #E6E0E9;
+        --md-sys-color-outline: #79747E; --md-sys-color-outline-variant: #CAC4D0;
+      }
+      :root[data-theme="dark"] {
+        --md-sys-color-primary: #D0BCFF; --md-sys-color-on-primary: #381E72;
+        --md-sys-color-primary-container: #4F378B; --md-sys-color-on-primary-container: #EADDFF;
+        --md-sys-color-secondary-container: #4A4458; --md-sys-color-on-secondary-container: #E8DEF8;
+        --md-sys-color-surface: #141218; --md-sys-color-on-surface: #E6E0E9; --md-sys-color-on-surface-variant: #CAC4D0;
+        --md-sys-color-surface-container-low: #1D1B20; --md-sys-color-surface-container: #211F26;
+        --md-sys-color-surface-container-high: #2B2930; --md-sys-color-surface-container-highest: #36343B;
+        --md-sys-color-outline: #938F99; --md-sys-color-outline-variant: #49454F;
+      }
+      body { transition: background .3s var(--ease-emph), color .3s var(--ease-emph); }
+
+      /* ── Ripple (M3 state-layer motion) ── */
+      .md-btn, .fab, .icon-btn, .chip { position: relative; overflow: hidden; }
+      .ripple { position: absolute; border-radius: 50%; background: currentColor; opacity: .26; transform: scale(0);
+        animation: mdripple .55s var(--ease-emph); pointer-events: none; }
+      @keyframes mdripple { to { transform: scale(2.3); opacity: 0; } }
+
+      /* ── Карточки: подъём по уровню (elevation) ── */
+      .md-card { transition: box-shadow .25s var(--ease-emph), transform .25s var(--ease-emph); }
+      .md-card:hover { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(0,0,0,.18), 0 6px 16px rgba(0,0,0,.12); }
     </style>
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+
+      const root = document.documentElement;
+      const tb = document.getElementById('themeBtn');
+      const ti = document.getElementById('themeIcon');
+      const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      const sync = () => { if (ti) ti.textContent = isDark() ? 'light_mode' : 'dark_mode'; };
+      tb && tb.addEventListener('click', () => { root.dataset.theme = isDark() ? 'light' : 'dark'; sync(); });
+      sync();
+
+      const rippleFx = (e) => {
+        const el = e.currentTarget, r = el.getBoundingClientRect();
+        const d = Math.max(r.width, r.height);
+        const sp = document.createElement('span');
+        sp.className = 'ripple';
+        sp.style.width = sp.style.height = d + 'px';
+        sp.style.left = (e.clientX - r.left - d / 2) + 'px';
+        sp.style.top = (e.clientY - r.top - d / 2) + 'px';
+        el.appendChild(sp);
+        sp.addEventListener('animationend', () => sp.remove());
+      };
+      document.querySelectorAll('.md-btn, .fab, .icon-btn, .chip').forEach((el) => el.addEventListener('pointerdown', rippleFx));
+    </script>
   </body>
 </html>

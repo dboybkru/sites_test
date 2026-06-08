@@ -31,3 +31,4 @@ assets-incoming/*
 .DS_Store
 Thumbs.db
 *.log
+.claude/

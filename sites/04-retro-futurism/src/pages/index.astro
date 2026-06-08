@@ -21,6 +21,7 @@ const base = import.meta.env.BASE_URL;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ретро-футуризм</title>
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <div class="sun" aria-hidden="true"></div>
@@ -50,7 +51,7 @@ const base = import.meta.env.BASE_URL;
       <h2>Треклист</h2>
       <div class="tracks">
         {tracks.map((tr) => (
-          <article class="track">
+          <article class="track" data-reveal style={`--d:${tracks.indexOf(tr)}`}>
             <span class="num">{tr.n}</span>
             <div><h3>{tr.t}</h3><p>{tr.d}</p></div>
             <span class="play">▶</span>
@@ -60,15 +61,15 @@ const base = import.meta.env.BASE_URL;
     </section>
 
     <section id="about" class="panel stats-band">
-      {stats.map((s) => (<div class="stat"><b>{s.n}</b><span>{s.l}</span></div>))}
+      {stats.map((s) => (<div class="stat" data-reveal style={`--d:${stats.indexOf(s)}`}><b>{s.n}</b><span>{s.l}</span></div>))}
     </section>
 
-    <section class="vibe">
-      <img src={`${base}img/neon.webp`} alt="Неоновый перформанс в дыму" loading="lazy" />
+    <section class="vibe" data-reveal>
+      <figure class="vibe-media"><img src={`${base}img/neon.webp`} alt="Неоновый перформанс в дыму" loading="lazy" /></figure>
       <span class="vibe-cap">// after hours</span>
     </section>
 
-    <section class="cta">
+    <section class="cta" data-reveal>
       <h2>Готов в закат?</h2>
       <a class="btn btn-lg" href="#">Начать поездку →</a>
     </section>
@@ -87,9 +88,9 @@ const base = import.meta.env.BASE_URL;
         border-radius: 50%; background: linear-gradient(180deg, #ffd166, #ff2e97); filter: blur(2px); box-shadow: 0 0 90px #ff2e97aa; }
       .sun::after { content:''; position:absolute; inset:0; border-radius:50%;
         background: repeating-linear-gradient(180deg, transparent 0 14px, #2d0b4e 14px 22px); mask: linear-gradient(180deg, transparent 55%, #000 55%); }
-      .grid-floor { position: fixed; bottom: 0; left: -50%; width: 200%; height: 45%; z-index: 0;
-        background-image: linear-gradient(#00e5ff55 1px, transparent 1px), linear-gradient(90deg, #00e5ff55 1px, transparent 1px);
-        background-size: 44px 44px; transform: perspective(340px) rotateX(72deg); transform-origin: bottom; }
+      .grid-floor { position: fixed; bottom: 0; left: -50%; width: 200%; height: 52%; z-index: 0;
+        background-image: linear-gradient(#00e5ffaa 1px, transparent 1px), linear-gradient(90deg, #00e5ff88 1px, transparent 1px);
+        background-size: 48px 48px; transform: perspective(340px) rotateX(72deg); transform-origin: bottom; }
       .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 1;
         background: repeating-linear-gradient(180deg, rgba(0,0,0,.16) 0 2px, transparent 2px 4px); }
       nav, header, section, footer { position: relative; z-index: 2; }
@@ -132,7 +133,7 @@ const base = import.meta.env.BASE_URL;
       .stat span { font-family: var(--font-mono); color: #c9bce8; font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
 
       .vibe { max-width: 900px; margin: 0 auto; padding: 4vh 6vw; position: relative; }
-      .vibe img { width: 100%; border-radius: 14px; border: 1px solid var(--neon); box-shadow: 0 0 40px #ff2e9755; display: block; }
+      
       .vibe-cap { position: absolute; left: calc(6vw + 16px); top: calc(4vh + 14px); font-family: var(--font-mono); color: var(--cyan); font-size: .85rem; text-shadow: 0 0 10px #00e5ff88; }
       .cta { text-align: center; padding: 8vh 6vw; }
       .cta h2 { font-size: clamp(1.8rem, 6vw, 3rem); margin: 0 0 var(--space-3); text-shadow: 0 0 18px var(--neon); }
@@ -141,6 +142,33 @@ const base = import.meta.env.BASE_URL;
         padding: 5vh 6vw; color: #c9bce8; font-family: var(--font-mono); font-size: .85rem; }
       footer a { color: var(--cyan); text-decoration: none; }
       @media (max-width: 640px){ .links a:not(.btn){ display:none; } }
+
+      /* синтвейв-сетка едет к зрителю */
+      .grid-floor { animation: gridmove 3s linear infinite; }
+      @keyframes gridmove { from { background-position: 0 0, 0 0; } to { background-position: 0 48px, 0 0; } }
+      .sun { animation: sunpulse 3.4s ease-in-out infinite; }
+      @keyframes sunpulse {
+        0%,100% { box-shadow: 0 0 70px #ff2e9788, 0 0 30px #ffd16655; transform: translateX(-50%) scale(1); }
+        50%     { box-shadow: 0 0 160px #ff2e97, 0 0 60px #ffd166aa; transform: translateX(-50%) scale(1.05); }
+      }
+      .track { transition: transform .25s var(--ease, cubic-bezier(.22,1,.36,1)), border-color .25s, box-shadow .25s; }
+      .track:hover { transform: translateY(-4px); }
+      @media (prefers-reduced-motion: reduce) { .grid-floor, .sun { animation: none; } }
+
+      /* фото в стиль: дуотон маджента→циан + неон-рамка + сканлайны */
+      .vibe-media { position: relative; margin: 0; border-radius: 14px; overflow: hidden;
+        border: 1px solid var(--neon); box-shadow: 0 0 44px #ff2e9766, inset 0 0 60px rgba(13,2,33,.5); }
+      .vibe-media img { width: 100%; display: block; filter: saturate(1.3) contrast(1.08) brightness(.92); }
+      .vibe-media::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(135deg, rgba(255,46,151,.6), rgba(120,40,160,.15) 45%, rgba(0,229,255,.5));
+        mix-blend-mode: color; }
+      .vibe-media::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+        background: repeating-linear-gradient(180deg, rgba(0,0,0,.22) 0 2px, transparent 2px 4px),
+          radial-gradient(120% 70% at 50% 100%, rgba(255,46,151,.35), transparent 60%); }
     </style>
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+    </script>
   </body>
 </html>

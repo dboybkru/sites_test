@@ -1,4 +1,5 @@
 ---
+import '@lab/motion/motion.css';
 const base = import.meta.env.BASE_URL;
 const clay = `${base}img/clay.webp`;
 const cards = [
@@ -17,6 +18,7 @@ const cards = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <nav class="nav">
@@ -29,23 +31,23 @@ const cards = [
 
     <header class="hero">
       <div class="copy">
-        <span class="pill">✨ новый питомец привычек</span>
-        <h1>Привычки, которые<br>хочется тискать</h1>
-        <p class="lead">Squish превращает рутину в игру с мягкими 3D-друзьями. Без стресса, стриков и чувства вины — только тёплый прогресс.</p>
-        <div class="cta">
+        <span class="pill" data-reveal style="--d:0">✨ новый питомец привычек</span>
+        <h1 data-reveal style="--d:1">Привычки, которые<br>хочется тискать</h1>
+        <p class="lead" data-reveal style="--d:2">Squish превращает рутину в игру с мягкими 3D-друзьями. Без стресса, стриков и чувства вины — только тёплый прогресс.</p>
+        <div class="cta" data-reveal style="--d:3">
           <a href="#" class="btn lg">Завести Сквиши</a>
           <a href="#how" class="btn lg soft">Как это работает</a>
         </div>
         <p class="users">🥹 уже тискают 120&nbsp;000 человек</p>
       </div>
-      <figure class="hero-art">
+      <figure class="hero-art" data-reveal data-float>
         <img src={clay} alt="Мягкие 3D-клей-персонажи Squish" loading="eager" />
       </figure>
     </header>
 
     <section id="how" class="cards">
       {cards.map((c) => (
-        <article class="claycard">
+        <article class="claycard" data-reveal style={`--d:${cards.indexOf(c)}`}>
           <div class="emoji">{c.ic}</div>
           <h3>{c.t}</h3>
           <p>{c.d}</p>
@@ -113,6 +115,19 @@ const cards = [
       .foot a { color: #e98bac; text-decoration: none; font-weight: 800; font-family: var(--display); }
 
       @media (max-width: 780px){ .hero { grid-template-columns: 1fr; } .hero-art { order: -1; } .links a:not(.btn){ display: none; } }
+
+      /* интерактив: мягкий подъём карточек, нажатие — вдавливание (клей) */
+      .claycard { transition: transform .25s var(--ease, cubic-bezier(.22,1,.36,1)), box-shadow .25s; }
+      .claycard:hover { transform: translateY(-6px); box-shadow: 12px 12px 26px #c4bce6, -12px -12px 26px #ffffff; }
+      .claycard:active { box-shadow: var(--inset); transform: translateY(-1px); }
+      /* плавание hero-арта — «живой» пластилин */
+      [data-float] { animation: clayfloat 6s ease-in-out infinite; }
+      @keyframes clayfloat { 0%,100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-12px) rotate(.6deg); } }
+      @media (prefers-reduced-motion: reduce) { [data-float] { animation: none; } }
     </style>
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+    </script>
   </body>
 </html>

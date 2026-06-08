@@ -1,4 +1,5 @@
 ---
+import '@lab/motion/motion.css';
 const base = import.meta.env.BASE_URL;
 const day = `${base}img/day.webp`;
 const night = `${base}img/night.webp`;
@@ -23,6 +24,7 @@ const amenities = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <nav class="nav">
@@ -34,27 +36,31 @@ const amenities = [
       </div>
     </nav>
 
-    <header class="hero" style={`background-image: linear-gradient(180deg, rgba(8,10,8,.45), rgba(8,10,8,.25) 40%, rgba(8,10,8,.85)), url(${night})`}>
+    <header class="hero">
+      <div class="hero-bg hero-day" style={`background-image: url(${day})`} aria-hidden="true"></div>
+      <div class="hero-bg hero-night" style={`background-image: url(${night})`} aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <span class="dn-badge" aria-hidden="true">день · ночь</span>
       <div class="hero-inner">
-        <p class="eyebrow">архитектурный ретрит · бразилия</p>
-        <h1>Concrete<br>&amp; Canopy</h1>
-        <p class="sub">Бруталистская вилла, которую за полвека поглотили джунгли. Бетон, вода и тропический лес — в одном дыхании.</p>
-        <div class="cta">
+        <p class="eyebrow" data-reveal style="--d:0">архитектурный ретрит · бразилия</p>
+        <h1 data-reveal style="--d:1">Concrete<br>&amp; Canopy</h1>
+        <p class="sub" data-reveal style="--d:2">Бруталистская вилла, которую за полвека поглотили джунгли. Бетон, вода и тропический лес — в одном дыхании.</p>
+        <div class="cta" data-reveal style="--d:3">
           <a href="#about" class="btn solid">Узнать историю</a>
           <a href="#gallery" class="btn line">Смотреть фото ↓</a>
         </div>
       </div>
       <div class="facts">
-        {facts.map((f) => (<div><b>{f.n}</b><span>{f.l}</span></div>))}
+        {facts.map((f, i) => (<div data-reveal style={`--d:${i}`}><b>{f.n}</b><span>{f.l}</span></div>))}
       </div>
     </header>
 
     <section id="about" class="about">
       <div class="about-text">
         <p class="kicker">о доме</p>
-        <h2>Там, где бетон уступает лесу</h2>
+        <h2 data-reveal>Там, где бетон уступает лесу</h2>
         {amenities.map((a) => (
-          <div class="amenity"><h3>{a.t}</h3><p>{a.d}</p></div>
+          <div class="amenity" data-reveal><h3>{a.t}</h3><p>{a.d}</p></div>
         ))}
         <a href="#" class="btn solid">Запросить тур</a>
       </div>
@@ -64,8 +70,8 @@ const amenities = [
     </section>
 
     <section id="gallery" class="gallery">
-      <figure class="g-night"><img src={night} alt="Вилла вечером" loading="lazy" /><figcaption>Сумерки</figcaption></figure>
-      <figure class="g-day"><img src={day} alt="Вилла днём" loading="lazy" /><figcaption>Полдень</figcaption></figure>
+      <figure class="g-night" data-reveal><img src={night} alt="Вилла вечером" loading="lazy" /><figcaption>Сумерки</figcaption></figure>
+      <figure class="g-day" data-reveal style="--d:1"><img src={day} alt="Вилла днём" loading="lazy" /><figcaption>Полдень</figcaption></figure>
     </section>
 
     <footer class="foot">
@@ -125,6 +131,27 @@ const amenities = [
         .gallery { grid-template-columns: 1fr; }
         .facts { gap: 32px; position: static; margin-top: 40px; }
       }
+
+      .hero { overflow: hidden; }
+      .hero-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; will-change: opacity, transform; }
+      .hero-day  { animation: kenburnsDay 26s ease-in-out infinite; }
+      .hero-night{ animation: nightFade 26s ease-in-out infinite, kenburnsNight 26s ease-in-out infinite; }
+      .hero-scrim{ position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8,10,8,.45), rgba(8,10,8,.25) 40%, rgba(8,10,8,.85)); }
+      .hero-inner { position: relative; z-index: 2; }
+      .facts { z-index: 2; }
+      .dn-badge { position: absolute; z-index: 2; top: 96px; right: 6vw; font-size: 12px; letter-spacing: .25em; text-transform: uppercase;
+        color: var(--accent); border: 1px solid rgba(163,177,138,.5); border-radius: 999px; padding: 6px 14px; backdrop-filter: blur(6px); }
+      @keyframes nightFade { 0% { opacity: 1; } 8% { opacity: 1; } 50% { opacity: 0; } 58% { opacity: 0; } 100% { opacity: 1; } }
+      @keyframes kenburnsDay { 0%,100% { transform: scale(1.06); } 50% { transform: scale(1.13) translate(-1.5%, -1%); } }
+      @keyframes kenburnsNight { 0%,100% { transform: scale(1.1); } 50% { transform: scale(1.04); } }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-night { animation: none; opacity: 1; }
+        .hero-day { animation: none; }
+      }
     </style>
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+    </script>
   </body>
 </html>

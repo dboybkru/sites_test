@@ -21,6 +21,15 @@ const sites = Object.entries(metas)
     };
   })
   .sort((a, b) => a.slug.localeCompare(b.slug));
+
+// Русская плюрализация: 1 дизайн, 2 дизайна, 5 дизайнов.
+const plural = (n, one, few, many) => {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+};
+const n = sites.length;
 ---
 
 <!doctype html>
@@ -28,28 +37,50 @@ const sites = Object.entries(metas)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Дизайн-лаборатория · витрина</title>
-    <meta name="description" content="Витрина дизайн-экспериментов: разные подходы, скилы и инструменты." />
+    <title>Дизайн-лаборатория · готовые дизайны сайтов</title>
+    <meta name="description" content={`${n} самодостаточных веб-дизайнов в разных стилях — от брутализма и глассморфизма до Material 3. Открой любой, посмотри вживую и забери целиком.`} />
   </head>
   <body>
     <main>
       <header class="hero m-fade-up">
-        <p class="eyebrow">test_site_design</p>
-        <h1>Дизайн-лаборатория</h1>
+        <p class="eyebrow">Дизайн-лаборатория</p>
+        <h1>Готовые дизайны сайтов, <span class="accent">которые можно забрать целиком</span></h1>
         <p class="lead">
-          Витрина экспериментов: разные подходы к дизайну сайтов, разные скилы и инструменты.
-          Каждая карточка — самодостаточный сайт.
+          {n} {plural(n, 'самодостаточный веб-дизайн', 'самодостаточных веб-дизайна', 'самодостаточных веб-дизайнов')}
+          в разных стилях — от брутализма и глассморфизма до Material&nbsp;3.
+          Открой любой, посмотри вживую и используй как основу своего сайта.
         </p>
-        <p class="count">{sites.length} {sites.length === 1 ? 'эксперимент' : 'экспериментов'}</p>
+        <ul class="props">
+          <li>Каждый — отдельная папка</li>
+          <li>Живое превью прямо в карточке</li>
+          <li>Готов к запуску и продаже</li>
+        </ul>
+        <a class="cta" href="#grid">Смотреть дизайны ↓</a>
       </header>
 
-      {sites.length === 0 ? (
+      {n === 0 ? (
         <p class="empty">Пока пусто. Создай первый сайт: <code>npm run new -- 02-name "Название"</code></p>
       ) : (
-        <section class="grid m-stagger">
+        <section id="grid" class="grid m-stagger">
           {sites.map((s, i) => (
-            <a class="card" href={s.href} style={`--accent:${s.accent}; --m-i:${i}`}>
-              <div class="thumb"><span class="mono">/{s.slug}/</span></div>
+            <a class="card" href={s.href} style={`--accent:${s.accent}; --m-i:${i}`} aria-label={`Открыть дизайн «${s.title}»`}>
+              <div class="thumb">
+                <div class="chrome">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                  <span class="url mono">/{s.slug}/</span>
+                </div>
+                <div class="frame">
+                  <iframe
+                    src={`${s.href}index.html`}
+                    title={`Превью: ${s.title}`}
+                    loading="lazy"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    scrolling="no"
+                  ></iframe>
+                </div>
+                <span class="open">Открыть →</span>
+              </div>
               <div class="body">
                 <div class="row">
                   <h2>{s.title}</h2>
@@ -67,7 +98,7 @@ const sites = Object.entries(metas)
       )}
 
       <footer>
-        <span>Собрано через <code>npm run build:all</code> · деплой на Vercel</span>
+        <span>Собрано через <code>npm run build:all</code> · хостинг на Yandex Object Storage</span>
       </footer>
     </main>
 
@@ -80,38 +111,78 @@ const sites = Object.entries(metas)
         font-family: var(--font-sans);
         background-image: radial-gradient(60% 50% at 50% 0%, rgba(139, 92, 246, 0.18), transparent 70%);
       }
-      main { max-width: 1100px; margin: 0 auto; padding: var(--space-5) var(--space-3); }
+      main { max-width: 1180px; margin: 0 auto; padding: var(--space-5) var(--space-3); }
+
+      /* ── Hero ── */
       .hero { text-align: center; margin-bottom: var(--space-5); }
-      .eyebrow { font-family: var(--font-mono); color: var(--color-accent-2); letter-spacing: 0.1em; margin: 0 0 var(--space-1); font-size: var(--fs-small); }
-      h1 { font-size: var(--fs-1); margin: 0 0 var(--space-2); line-height: 1.05; }
-      .lead { color: var(--color-text-dim); max-width: 560px; margin: 0 auto; font-size: var(--fs-3); }
-      .count { font-family: var(--font-mono); color: var(--color-text-dim); font-size: var(--fs-small); margin-top: var(--space-3); }
-      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-3); }
+      .eyebrow { font-family: var(--font-mono); color: var(--color-accent-2); letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 var(--space-2); font-size: var(--fs-small); }
+      h1 { font-size: var(--fs-1); margin: 0 auto var(--space-3); line-height: 1.05; max-width: 16ch; font-weight: 800; letter-spacing: -0.02em; }
+      h1 .accent { background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .lead { color: var(--color-text-dim); max-width: 60ch; margin: 0 auto; font-size: var(--fs-3); line-height: 1.6; }
+      .props { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1) var(--space-3); padding: 0; margin: var(--space-3) 0 0; }
+      .props li { font-family: var(--font-mono); font-size: var(--fs-small); color: var(--color-text-dim); display: flex; align-items: center; gap: 0.4em; }
+      .props li::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--color-accent-2); }
+      .cta {
+        display: inline-block; margin-top: var(--space-4); text-decoration: none;
+        font-weight: 600; color: var(--color-text);
+        background: var(--color-surface); border: 1px solid var(--color-border);
+        border-radius: 999px; padding: 0.65em 1.5em;
+        transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), background 0.25s var(--ease);
+      }
+      .cta:hover { border-color: var(--color-accent); transform: translateY(-2px); background: var(--color-surface-2); }
+
+      /* ── Grid ── */
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-3); scroll-margin-top: var(--space-3); }
       .card {
         display: flex; flex-direction: column; text-decoration: none; color: inherit;
         background: var(--color-surface); border: 1px solid var(--color-border);
         border-radius: var(--radius-lg); overflow: hidden;
         transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
       }
-      .card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 20px 50px -20px var(--accent); }
-      .thumb {
-        height: 150px; display: grid; place-items: center;
-        background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 35%, var(--color-surface-2)), var(--color-surface-2));
+      .card:hover, .card:focus-visible { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 24px 60px -24px var(--accent); outline: none; }
+      .card:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 70%, transparent), 0 24px 60px -24px var(--accent); }
+
+      /* ── Live превью ── */
+      .thumb { position: relative; aspect-ratio: 16 / 11; background: var(--color-surface-2); border-bottom: 1px solid var(--color-border); overflow: hidden; }
+      .chrome { position: absolute; inset: 0 0 auto 0; z-index: 2; height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; background: color-mix(in srgb, var(--color-bg) 75%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--color-border); }
+      .chrome .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--color-border); }
+      .chrome .url { margin-left: 8px; font-size: 0.72rem; color: var(--color-text-dim); opacity: 0.8; }
+      .frame { position: absolute; inset: 30px 0 0 0; overflow: hidden; }
+      .frame iframe {
+        position: absolute; top: 0; left: 0;
+        width: 400%; height: 400%;
+        transform: scale(0.25); transform-origin: top left;
+        border: 0; pointer-events: none; background: var(--color-bg);
       }
-      .thumb .mono { font-family: var(--font-mono); color: var(--color-text); opacity: 0.7; }
+      .open {
+        position: absolute; z-index: 3; right: 12px; bottom: 12px;
+        font-size: 0.78rem; font-weight: 600; color: #fff;
+        background: var(--accent); border-radius: 999px; padding: 5px 12px;
+        opacity: 0; transform: translateY(6px); transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+        box-shadow: 0 6px 20px -6px var(--accent);
+      }
+      .card:hover .open, .card:focus-visible .open { opacity: 1; transform: translateY(0); }
+
+      /* ── Body ── */
       .body { padding: var(--space-3); }
       .row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
-      h2 { font-size: var(--fs-3); margin: 0; }
-      .desc { color: var(--color-text-dim); font-size: var(--fs-small); margin: var(--space-1) 0 var(--space-2); }
+      h2 { font-size: var(--fs-3); margin: 0; font-weight: 700; }
+      .desc { color: var(--color-text-dim); font-size: var(--fs-small); line-height: 1.55; margin: var(--space-1) 0 var(--space-2); }
       .tags { display: flex; gap: var(--space-1); flex-wrap: wrap; }
       .tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-dim); border: 1px solid var(--color-border); border-radius: 999px; padding: 2px 10px; }
-      .badge { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 999px; padding: 3px 9px; }
+      .badge { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 999px; padding: 3px 9px; flex: none; }
       .badge-demo { background: rgba(34, 211, 238, 0.15); color: var(--color-accent-2); }
       .badge-wip { background: rgba(160, 160, 184, 0.15); color: var(--color-text-dim); }
       .badge-done { background: rgba(139, 92, 246, 0.18); color: var(--color-accent); }
+
       .empty { text-align: center; color: var(--color-text-dim); }
       code { font-family: var(--font-mono); background: var(--color-surface-2); padding: 2px 7px; border-radius: 6px; }
       footer { margin-top: var(--space-5); text-align: center; color: var(--color-text-dim); font-size: var(--fs-small); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card, .cta, .open { transition: none; }
+        .card:hover, .card:focus-visible { transform: none; }
+      }
     </style>
   </body>
 </html>

@@ -1,4 +1,5 @@
 ---
+import '@lab/motion/motion.css';
 const base = import.meta.env.BASE_URL;
 const sky = `${base}img/sky.webp`;
 const hours = [
@@ -30,9 +31,11 @@ const features = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body style={`background-image: url(${sky})`}>
     <div class="veil"></div>
+    <div class="blobs" aria-hidden="true"><span class="bl b1"></span><span class="bl b2"></span><span class="bl b3"></span><span class="bl b4"></span></div>
 
     <nav class="nav glass">
       <a class="logo" href="#">◐ Aura</a>
@@ -45,17 +48,17 @@ const features = [
 
     <header class="hero">
       <div class="hero-copy">
-        <span class="eyebrow glass">● погода нового поколения</span>
-        <h1>Погода, на которую<br>приятно смотреть</h1>
-        <p class="lead">Aura показывает небо таким, какое оно есть прямо сейчас. Гиперлокальный прогноз в интерфейсе, который дышит вместе с городом.</p>
-        <div class="cta">
+        <span class="eyebrow glass" data-reveal style="--d:0">● погода нового поколения</span>
+        <h1 data-reveal style="--d:1">Погода, на которую<br>приятно смотреть</h1>
+        <p class="lead" data-reveal style="--d:2">Aura показывает небо таким, какое оно есть прямо сейчас. Гиперлокальный прогноз в интерфейсе, который дышит вместе с городом.</p>
+        <div class="cta" data-reveal style="--d:3">
           <a href="#" class="btn lg">App Store</a>
           <a href="#" class="btn lg ghost">Google Play</a>
         </div>
         <p class="rating glass">★ 4.9 · 38&nbsp;000 оценок</p>
       </div>
 
-      <aside class="widget glass">
+      <aside class="widget glass" data-reveal style="--d:2">
         <div class="w-top">
           <div><p class="w-city">Сочи</p><p class="w-cond">Ясно, к вечеру облачно</p></div>
           <p class="w-temp">+24°</p>
@@ -73,7 +76,7 @@ const features = [
 
     <section id="forecast" class="forecast">
       {week.map((w) => (
-        <article class="day glass">
+        <article class="day glass" data-reveal style={`--d:${week.indexOf(w)}`}>
           <span class="dn">{w.d}</span>
           <span class="di">{w.i}</span>
           <span class="dt"><b>{w.hi}</b> / {w.lo}</span>
@@ -83,7 +86,7 @@ const features = [
 
     <section id="features" class="features">
       {features.map((f) => (
-        <article class="feat glass">
+        <article class="feat glass" data-reveal data-tilt style={`--d:${features.indexOf(f)}`}>
           <span class="fi">{f.ic}</span>
           <h3>{f.t}</h3>
           <p>{f.d}</p>
@@ -149,6 +152,27 @@ const features = [
         .forecast { grid-template-columns: repeat(2,1fr); }
         .nav-right a:not(.btn){ display: none; }
       }
+
+      /* ── Цветные блобы под стеклом (живой фон) ── */
+      .blobs { position: fixed; inset: -20vmax; z-index: 0; overflow: hidden; filter: blur(60px) saturate(150%); pointer-events: none; }
+      .bl { position: absolute; width: 52vmax; height: 52vmax; border-radius: 50%; mix-blend-mode: screen; opacity: .55; will-change: transform; }
+      .b1 { background: radial-gradient(circle at 50% 50%, #ff8fb1 0%, transparent 60%); top: -8%; left: -6%; animation: gdrift1 24s ease-in-out infinite; }
+      .b2 { background: radial-gradient(circle at 50% 50%, #22d3ee 0%, transparent 60%); top: 4%; right: -10%; animation: gdrift2 28s ease-in-out infinite; }
+      .b3 { background: radial-gradient(circle at 50% 50%, #c084fc 0%, transparent 62%); bottom: -16%; left: 12%; animation: gdrift3 32s ease-in-out infinite; }
+      .b4 { background: radial-gradient(circle at 50% 50%, #fbbf24 0%, transparent 60%); bottom: -12%; right: 4%; width: 40vmax; height: 40vmax; animation: gdrift4 20s ease-in-out infinite; }
+      @keyframes gdrift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(16vw,12vh) scale(1.2); } }
+      @keyframes gdrift2 { 0%,100% { transform: translate(0,0) scale(1.1); } 50% { transform: translate(-14vw,14vh) scale(.85); } }
+      @keyframes gdrift3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(12vw,-12vh) scale(1.18); } }
+      @keyframes gdrift4 { 0%,100% { transform: translate(0,0) scale(.95); } 50% { transform: translate(-12vw,-10vh) scale(1.12); } }
+
+      .day, .feat { transition: transform .28s var(--ease, cubic-bezier(.22,1,.36,1)), box-shadow .28s; }
+      .day:hover, .feat:hover { transform: translateY(-5px); box-shadow: 0 18px 50px rgba(40,15,55,.4), inset 0 1px 0 rgba(255,255,255,.5); }
+
+      @media (prefers-reduced-motion: reduce) { .bl { animation: none !important; } }
     </style>
+    <script>
+      import { initMotion } from '@lab/motion/motion.js';
+      initMotion();
+    </script>
   </body>
 </html>
